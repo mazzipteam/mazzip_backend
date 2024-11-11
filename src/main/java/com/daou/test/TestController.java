@@ -1,7 +1,8 @@
 package com.daou.test;
 
-import com.daou.response.ResponseEntity;
+import com.daou.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,7 +14,7 @@ public class TestController {
     // RestAPI 기초
     @GetMapping("test1")
     public ResponseEntity test() {
-        return ResponseEntity.builder().status(200).message("테스트 성공").data("테스트 성공").build();
+        return ResponseEntity.ok(CommonResponse.builder().status(200).message("테스트 성공").data("테스트 성공").build());
     }
 
     // Test 생성
@@ -21,7 +22,7 @@ public class TestController {
     public ResponseEntity testCreate(@RequestBody TestCreate testCreate) {
         var test = testService.create(testCreate);
 
-        return ResponseEntity.builder().status(200).message("계정 생성 성공").data(test).build();
+        return ResponseEntity.ok(CommonResponse.builder().status(200).message("계정 생성 성공").data(test).build());
     }
 
     // Test 조회
@@ -29,6 +30,6 @@ public class TestController {
     public ResponseEntity testAccess(@RequestBody TestAccess testAccess) {
         var test = testService.access(testAccess);
 
-        return ResponseEntity.builder().status(200).message("로그인 성공").data(test).build();
+        return ResponseEntity.ok(CommonResponse.builder().status(200).message("로그인 성공").data(test).build());
     }
 }
