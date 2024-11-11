@@ -28,6 +28,18 @@ public class RestaurantController {
     }
     
     // 맛집 삭제
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity delete(@RequestParam Long restaurantId) {
+        var restaurant = restaurantService.delete(restaurantId);
+        var response = CommonResponse.builder().code(200).message("맛집 삭제 성공").data(restaurant).build();
+        return ResponseEntity.ok(response);
+    }
     
     // 맛집 조회
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity get(@PathVariable Long restaurantId) {
+        var restaurant = restaurantService.getRestaurant(restaurantId);
+        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(restaurant).build();
+        return ResponseEntity.ok(response);
+    }
 }

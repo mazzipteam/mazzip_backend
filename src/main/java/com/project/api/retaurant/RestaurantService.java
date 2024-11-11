@@ -15,7 +15,6 @@ import static com.project.api.user.UserService.isValidTelNum;
 public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
-    private final UserRepository userRepository;
 
     public Restaurant create(RestaurantCreateDTO restaurantCreateDTO) {
         // 1. [예외처리] 전화번호 서식 오류
@@ -99,6 +98,21 @@ public class RestaurantService {
         restaurant.setUser(user);
 
         restaurantRepository.save(restaurant);
+        return restaurant;
+    }
+
+    public Restaurant delete(Long restaurantId) {
+        var restaurant = restaurantRepository.findByRestaurantId(restaurantId)
+                .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
+
+        restaurantRepository.deleteByRestaurantId(restaurantId);
+        return restaurant;
+    }
+
+    public Restaurant getRestaurant(Long restaurantId) {
+        var restaurant = restaurantRepository.findByRestaurantId(restaurantId)
+                .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
+
         return restaurant;
     }
 }
