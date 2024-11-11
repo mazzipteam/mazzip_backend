@@ -1,4 +1,4 @@
-package com.daou.common;
+package com.project.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

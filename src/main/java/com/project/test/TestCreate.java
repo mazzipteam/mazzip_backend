@@ -1,4 +1,4 @@
-package com.daou.test;
+package com.project.test;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +7,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class TestAccess {
+public class TestCreate {
     private String testParam1;
     private String testParam2;
+    private String testParam3;
 }

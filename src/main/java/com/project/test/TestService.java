@@ -1,4 +1,4 @@
-package com.daou.test;
+package com.project.test;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,6 +1,6 @@
-package com.daou.exception;
+package com.project.exception;
 
-import com.daou.common.CommonResponse;
+import com.project.common.CommonResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.daou.exception.errorcode.BasicErrorCode.DATA_BASE_ERROR;
-import static com.daou.exception.errorcode.BasicErrorCode.ERROR_NOT_FOUND;
+import static com.project.exception.errorcode.BasicErrorCode.DATA_BASE_ERROR;
+import static com.project.exception.errorcode.BasicErrorCode.ERROR_NOT_FOUND;
 
 @Log4j2
 @RestControllerAdvice

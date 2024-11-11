@@ -1,6 +1,6 @@
-package com.daou.exception.errorcode;
+package com.project.exception.errorcode;
 
-import com.daou.exception.ErrorMessage;
+import com.project.exception.ErrorMessage;
 
 public interface BasicErrorCode {
     ErrorMessage ERROR_NOT_FOUND = new ErrorMessage(404, "예기치 못한 오류");

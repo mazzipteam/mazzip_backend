@@ -1,6 +1,6 @@
-package com.daou.test;
+package com.project.test;
 
-import com.daou.common.CommonResponse;
+import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

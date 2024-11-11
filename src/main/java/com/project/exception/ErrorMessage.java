@@ -1,4 +1,4 @@
-package com.daou.exception;
+package com.project.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
