@@ -1,6 +1,5 @@
 package com.project.api.retaurant;
 
-import com.project.api.user.UserRepository;
 import com.project.api.user.UserService;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
