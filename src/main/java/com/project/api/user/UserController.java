@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
-@RequiredArgsConstructor // 자동 DI
+@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
@@ -19,7 +19,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    // 유저 변경
+    // 유저 수정
     @PatchMapping
     public ResponseEntity update(@RequestBody UserUpdateDTO userUpdateDTO) {
         var user = userService.update(userUpdateDTO);

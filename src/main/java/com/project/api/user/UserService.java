@@ -15,7 +15,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User create(UserCreateDTO userCreateDTO) {
-        // TODO: 반환값 서식 에러처리 할 것
         // 1. [예외처리] 이메일 서식 오류
         if(!isValidEmail(userCreateDTO.getEmail()))
             throw new ControlledException(EMAIL_OF_INCORRECT_FORMAT);
@@ -103,11 +102,11 @@ public class UserService {
         return user;
     }
 
-    private boolean isValidTelNum(String telNum) {
+    public static boolean isValidTelNum(String telNum) {
         return telNum.length() == 11 && telNum.matches("\\d+");
     }
 
-    private boolean isValidEmail(String email) {
+    private static boolean isValidEmail(String email) {
         String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 

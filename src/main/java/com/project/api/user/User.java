@@ -19,7 +19,7 @@ public class User {
     private Long userId;
 
     @Column(unique = true, nullable = false)
-    private String email; // TODO: 최종에서는 서식 검사할 것
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -28,7 +28,7 @@ public class User {
     private String nickName;
 
     @Column(nullable = false)
-    private String telNum; // TODO: 전화번호 서식 검사
+    private String telNum;
 
     @Column(nullable = false)
     private String address; // TODO: 가능하면 주소 인증(?)
