@@ -41,7 +41,7 @@ public class Restaurant {
     private Region region = 성북구; // 성북구 맛집이므로, "성북구" 고정
 
     @Column(nullable = false)
-    private String latLng; // 위경도에 대한 JSON 값 저장
+    private String latLng; // 위경도에 대한 JSON 값 저장 // 주소와 일치해야함
 
     @Column(nullable = false)
     private String telNum; // TODO: 전화번호 서식 검사

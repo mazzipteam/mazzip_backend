@@ -61,12 +61,12 @@ public class UserService {
         if(!isValidTelNum(userUpdateDTO.getTelNum()))
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
-        var user = userRepository.findByUserId(userUpdateDTO.getUserId())
-                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND));
-
         // 2. [예외처리] 이미 존재하는 nickName
         if(userRepository.findByNickName(userUpdateDTO.getNickName()).orElse(null) != null)
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
+
+        var user = userRepository.findByUserId(userUpdateDTO.getUserId())
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND));
 
         if(userUpdateDTO.getPassword() != null)
             user.setPassword(userUpdateDTO.getPassword());
