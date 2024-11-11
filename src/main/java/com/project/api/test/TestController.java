@@ -1,4 +1,4 @@
-package com.project.test;
+package com.project.api.test;
 
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
