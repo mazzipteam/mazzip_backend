@@ -7,36 +7,28 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TestService {
-    private final UserRepositoty userRepositoty;
-
+    private final TestRepository testRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public User login(Login login) {
-        var userId = login.getId();
+    public Test access(TestAccess testAccess) {
+        // testParam2는 Unique이기 때문에 접근가능
+        var testParam2 = testAccess.getTestParam2();
 
         // 1. id를 통해 해당 엔티티 불러오기
-        var user = userRepositoty.findByUserId(userId)
+        var test = testRepository.findByTestParam2(testParam2)
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
 
-        // 2. passwordEncoder match()를 통해 참 거짓 판별
-        if(passwordEncoder.matches(login.getPassword(), user.getEncodedPwd())){
-            // id와 pwd 정보는 반환 안함
-            user.setUserId(null);
-            user.setEncodedPwd(null);
-
-            return user;
-        }
-        else throw new RuntimeException("Wrong Password");
+        return test;
     }
 
-    public User signup(Signup signup) {
-        var user = User.builder()
-                .nickname(signup.getNickname())
-                .userId(signup.getId())
-                .encodedPwd(getEncodedPwd(signup.getPassword()))
+    public Test create(TestCreate testCreate) {
+        var test = Test.builder()
+                .testParam1(testCreate.getTestParam1())
+                .testParam2(testCreate.getTestParam2())
+                .testParam3(testCreate.getTestParam3())
                 .build();
-        userRepositoty.save(user);
-        return user;
+        testRepository.save(test);
+        return test;
     }
 
     public String getEncodedPwd(String password) {

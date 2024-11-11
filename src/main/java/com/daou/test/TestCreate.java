@@ -7,7 +7,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class Login {
-    private String id;
-    private String password;
+public class TestCreate {
+    private String testParam1;
+    private String testParam2;
+    private String testParam3;
 }

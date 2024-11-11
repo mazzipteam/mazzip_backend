@@ -7,8 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class Signup {
-    private String nickname;
-    private String id;
-    private String password;
+public class TestAccess {
+    private String testParam1;
+    private String testParam2;
 }
