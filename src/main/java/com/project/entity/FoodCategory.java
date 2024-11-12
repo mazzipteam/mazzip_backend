@@ -20,11 +20,11 @@ public class FoodCategory {
     private String name;
 
     @Column(nullable = false)
-    private Integer schToday = 0;
+    private Integer schToday;
 
     @Column(nullable = false)
-    private Integer schWeek = 0;
+    private Integer schWeek;
 
     @Column(nullable = false)
-    private Integer schMonth = 0;
+    private Integer schMonth;
 }

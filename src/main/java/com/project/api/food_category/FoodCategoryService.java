@@ -22,6 +22,9 @@ public class FoodCategoryService {
 
         var foodCategory = FoodCategory.builder()
                 .name(foodCategoryCreateDTO.getName())
+                .schToday(0)
+                .schWeek(0)
+                .schMonth(0)
                 .build();
 
         foodCategoryRepository.save(foodCategory);

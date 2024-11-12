@@ -33,6 +33,9 @@ public class ReviewService {
                 .image(reviewCreateDTO.getImage())
                 .user(user)
                 .restaurant(restaurant)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .recommend(0)
                 .build();
 
         reviewRepository.save(review);

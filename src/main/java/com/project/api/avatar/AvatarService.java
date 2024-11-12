@@ -22,6 +22,9 @@ public class AvatarService {
         var avatar = Avatar.builder()
                 .name(avatarCreateDTO.getName())
                 .user(user)
+                .level(1)
+                .experience(0)
+                .evolution(1)
                 .build();
 
         avatarRepository.save(avatar);

@@ -9,6 +9,7 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.project.exception.error_code.MyClothesErrorCode.*;
@@ -31,6 +32,8 @@ public class MyClothesService {
         var myClothes = MyClothes.builder()
                 .avatar(avatar)
                 .clothes(clothes)
+                .wear('N')
+                .purchaseTime(LocalDateTime.now())
                 .build();
 
         myClothesRepository.save(myClothes);

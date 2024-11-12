@@ -28,8 +28,8 @@ public class MyClothes {
     private Clothes clothes;
 
     @Column(nullable = false)
-    private Character wear = 'N';
+    private Character wear;
 
     @Column(nullable = false)
-    private LocalDateTime purchaseTime = LocalDateTime.now();
+    private LocalDateTime purchaseTime;
 }

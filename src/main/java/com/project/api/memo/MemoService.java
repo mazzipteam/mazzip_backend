@@ -29,6 +29,8 @@ public class MemoService {
                 .description(memoCreateDTO.getDescription())
                 .user(user)
                 .restaurant(restaurant)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
         memoRepository.save(memo);

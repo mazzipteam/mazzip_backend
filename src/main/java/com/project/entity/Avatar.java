@@ -21,13 +21,13 @@ public class Avatar {
     private String name;
 
     @Column(nullable = false)
-    private int level = 1;
+    private int level;
 
     @Column(nullable = false)
-    private int experience = 0;
+    private int experience;
 
     @Column(nullable = false)
-    private int evolution = 1;
+    private int evolution;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -30,15 +30,15 @@ public class Review {
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt;
 
     private byte[] image;
 
     @Column(nullable = false)
-    private Integer recommend = 0;
+    private Integer recommend;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
