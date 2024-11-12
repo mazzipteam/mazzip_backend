@@ -41,7 +41,7 @@ public class RestaurantImageController {
     @GetMapping("/{restaurantImageId}")
     public ResponseEntity get(@PathVariable Long restaurantImageId) {
         var restaurantImage = restaurantImageService.getRestaurantImage(restaurantImageId);
-        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(restaurantImage).build();
+        var response = CommonResponse.builder().code(200).message("맛집 조회 성공").data(restaurantImage).build();
         return ResponseEntity.ok(response);
     }
 }

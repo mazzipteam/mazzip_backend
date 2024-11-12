@@ -29,7 +29,7 @@ public class MenuController {
         return ResponseEntity.ok(response);
     }
 
-    // 토큰 삭제
+    // 메뉴 삭제
     @DeleteMapping("/{menuId}")
     public ResponseEntity delete(@PathVariable Long menuId) {
         var menu = menuService.delete(menuId);
