@@ -37,8 +37,7 @@ public class ReportService {
     }
 
     public Report update(ReportUpdateDTO reportUpdateDTO) {
-        var report = reportRepository.findByReportId(reportUpdateDTO.getReportId())
-                .orElseThrow(() -> new ControlledException(REPORT_NOT_FOUND));
+        var report = getReport(reportUpdateDTO.getReportId());
 
         if(reportUpdateDTO.getCategory() != null) {
             // 1. [예외처리] 잘못된 형식의 카테고리
@@ -63,8 +62,7 @@ public class ReportService {
     }
 
     public Report delete(Long reportId) {
-        var report = reportRepository.findByReportId(reportId)
-                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND));
+        var report = getReport(reportId);
 
         reportRepository.deleteByReportId(reportId);
         return report;

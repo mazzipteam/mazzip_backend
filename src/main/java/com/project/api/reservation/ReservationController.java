@@ -35,14 +35,14 @@ public class ReservationController {
     @DeleteMapping("/{reservationId}")
     public ResponseEntity delete(@PathVariable Long reservationId) {
         var reservation = reservationService.delete(reservationId);
-        var response = CommonResponse.builder().code(200).message("예약 삭제 성공").data(reservationId).build();
+        var response = CommonResponse.builder().code(200).message("예약 삭제 성공").data(reservation).build();
         return ResponseEntity.ok(response);
     }
 
     // 예약 조회
     @GetMapping("/{reservationId}")
     public ResponseEntity get(@PathVariable Long reservationId) {
-        var reservation = reservationService.getMyClothes(reservationId);
+        var reservation = reservationService.getReservation(reservationId);
         var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservation).build();
         return ResponseEntity.ok(response);
     }

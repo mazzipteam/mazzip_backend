@@ -36,8 +36,7 @@ public class MemoService {
     }
 
     public Memo update(MemoUpdateDTO memoUpdateDTO) {
-        var memo = memoRepository.findByMemoId(memoUpdateDTO.getMemoId())
-                .orElseThrow(() -> new ControlledException(MEMO_NOT_FOUND));
+        var memo = getMemo(memoUpdateDTO.getMemoId());
 
         if(!memoUpdateDTO.getTitle().isEmpty())
             memo.setTitle(memoUpdateDTO.getTitle());
@@ -52,8 +51,7 @@ public class MemoService {
     }
 
     public Memo delete(Long memoId) {
-        var memo = memoRepository.findByMemoId(memoId)
-                .orElseThrow(() -> new ControlledException(MEMO_NOT_FOUND));
+        var memo = getMemo(memoId);
 
         memoRepository.deleteByMemoId(memoId);
         return memo;

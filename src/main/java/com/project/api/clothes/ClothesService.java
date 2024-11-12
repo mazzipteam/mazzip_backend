@@ -36,8 +36,7 @@ public class ClothesService {
     }
 
     public Clothes update(ClothesUpdateDTO clothesUpdateDTO) {
-        var clothes = clothesRepository.findByClothesId(clothesUpdateDTO.getClothesId())
-                .orElseThrow(() -> new ControlledException(CLOTHES_NOT_FOUND));
+        var clothes = getClothes(clothesUpdateDTO.getClothesId());
 
         if(!clothesUpdateDTO.getName().isEmpty()) {
             // 1. [예외처리] 이미 존재하는 의상명
@@ -81,8 +80,7 @@ public class ClothesService {
     }
 
     public Clothes delete(Long clothesId) {
-        var clothes = clothesRepository.findById(clothesId)
-                        .orElseThrow(()->new ControlledException(CLOTHES_NOT_FOUND));
+        var clothes = getClothes(clothesId);
 
         clothesRepository.deleteByClothesId(clothesId);
         return clothes;

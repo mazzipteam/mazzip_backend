@@ -33,8 +33,7 @@ public class FoodCategoryService {
         if(foodCategoryRepository.findByName(foodCategoryUpdateDTO.getName()).isPresent())
             throw new ControlledException(FOOD_CATEGORY_NAME_ALREADY_EXISTS);
 
-        var foodCategory = foodCategoryRepository.findByFoodCategoryId(foodCategoryUpdateDTO.getFoodCategoryId())
-                .orElseThrow(() -> new ControlledException(FOOD_CATEGORY_NOT_FOUND));
+        var foodCategory = getFoodCategory(foodCategoryUpdateDTO.getFoodCategoryId());
 
         if(!foodCategoryUpdateDTO.getName().isEmpty())
             foodCategory.setName(foodCategoryUpdateDTO.getName());
@@ -44,8 +43,7 @@ public class FoodCategoryService {
     }
 
     public FoodCategory delete(Long foodCategoryId) {
-        var foodCategory = foodCategoryRepository.findById(foodCategoryId)
-                .orElseThrow(() -> new ControlledException(FOOD_CATEGORY_NOT_FOUND));
+        var foodCategory = getFoodCategory(foodCategoryId);
 
         foodCategoryRepository.deleteByFoodCategoryId(foodCategoryId);
         return foodCategory;

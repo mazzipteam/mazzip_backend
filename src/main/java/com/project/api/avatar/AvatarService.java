@@ -29,8 +29,7 @@ public class AvatarService {
     }
 
     public Avatar update(AvatarUpdateDTO avatarUpdateDTO) {
-        var avatar = avatarRepository.findByAvatarId(avatarUpdateDTO.getAvatarId())
-                .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND));
+        var avatar = getAvatar(avatarUpdateDTO.getAvatarId());
 
         if(!avatarUpdateDTO.getName().isEmpty())
             avatar.setName(avatarUpdateDTO.getName());
@@ -40,8 +39,7 @@ public class AvatarService {
     }
 
     public Avatar delete(Long avatarId) {
-        var avatar = avatarRepository.findByAvatarId(avatarId)
-                .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND));
+        var avatar = getAvatar(avatarId);
 
         avatarRepository.deleteById(avatarId);
         return avatar;

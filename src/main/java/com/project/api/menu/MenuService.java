@@ -43,8 +43,7 @@ public class MenuService {
     }
 
     public Menu update(MenuUpdateDTO menuUpdateDTO) {
-        var menu = menuRepository.findByMenuId(menuUpdateDTO.getMenuId())
-                .orElseThrow(() -> new ControlledException(MENU_NOT_FOUND));
+        var menu = getMenu(menuUpdateDTO.getMenuId());
 
         if(menuUpdateDTO.getFoodCategoryId() != null){
             // 1. [에러처리]
@@ -106,8 +105,7 @@ public class MenuService {
     }
 
     public Menu delete(Long menuId) {
-        var menu = menuRepository.findByMenuId(menuId)
-                .orElseThrow(() -> new ControlledException(MENU_NOT_FOUND));
+        var menu = getMenu(menuId);
 
         menuRepository.deleteByMenuId(menuId);
         return menu;

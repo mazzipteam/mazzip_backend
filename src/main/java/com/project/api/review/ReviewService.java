@@ -41,8 +41,7 @@ public class ReviewService {
     }
 
     public Review update(ReviewUpdateDTO reviewUpdateDTO) {
-        var review = reviewRepository.findByReviewId(reviewUpdateDTO.getReviewId())
-                .orElseThrow(()->new ControlledException(REVIEW_NOT_FOUND));
+        var review = getReview(reviewUpdateDTO.getReviewId());
 
         if(!reviewUpdateDTO.getTitle().isEmpty())
             review.setTitle(reviewUpdateDTO.getTitle());
@@ -65,8 +64,7 @@ public class ReviewService {
     }
 
     public Review delete(Long reviewId) {
-        var review = reviewRepository.findByReviewId(reviewId)
-                .orElseThrow(()->new ControlledException(REVIEW_NOT_FOUND));
+        var review = getReview(reviewId);
 
         reviewRepository.deleteByReviewId(reviewId);
         return review;

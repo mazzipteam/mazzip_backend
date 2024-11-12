@@ -79,8 +79,7 @@ public class RestaurantService {
                 && !restaurantUpdateDTO.getTakeOut().equals("N"))
             throw new ControlledException(TAKE_OUT_OF_INCORRECT_FORMAT);
 
-        var restaurant = restaurantRepository.findByRestaurantId(restaurantUpdateDTO.getRestaurantId())
-                .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
+        var restaurant = getRestaurant(restaurantUpdateDTO.getRestaurantId());
 
         if(!restaurantUpdateDTO.getName().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getName());
@@ -116,8 +115,7 @@ public class RestaurantService {
     }
 
     public Restaurant delete(Long restaurantId) {
-        var restaurant = restaurantRepository.findByRestaurantId(restaurantId)
-                .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
+        var restaurant = getRestaurant(restaurantId);
 
         restaurantRepository.deleteByRestaurantId(restaurantId);
         return restaurant;

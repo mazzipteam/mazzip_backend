@@ -31,8 +31,7 @@ public class NoticeService {
     }
 
     public Notice delete(Long noticeId) {
-        var notice = noticeRepository.findByNoticeId(noticeId)
-                .orElseThrow(() -> new ControlledException(NOTICE_NOT_FOUND));
+        var notice = getNotice(noticeId);
 
         noticeRepository.deleteByNoticeId(noticeId);
         return notice;

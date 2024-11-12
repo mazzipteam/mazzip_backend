@@ -67,9 +67,7 @@ public class UserService {
         if(userRepository.findByNickName(userUpdateDTO.getNickName()).isPresent())
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
 
-        var user = userRepository.findByUserId(userUpdateDTO.getUserId())
-                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND));
-
+        var user = getUser(userUpdateDTO.getUserId());
         if(!userUpdateDTO.getPassword().isEmpty())
             user.setPassword(userUpdateDTO.getPassword());
 
@@ -92,8 +90,7 @@ public class UserService {
     }
 
     public User delete(Long userId) {
-        var user = userRepository.findByUserId(userId)
-                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND));
+        var user = getUser(userId);
 
         userRepository.deleteByUserId(userId);
         return user;

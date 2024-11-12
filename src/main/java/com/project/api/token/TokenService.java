@@ -29,8 +29,7 @@ public class TokenService {
     }
 
     public Token update(TokenUpdateDTO tokenUpdateDTO) {
-        var token = tokenRepository.findByTokenId(tokenUpdateDTO.getTokenId())
-                .orElseThrow(()->new ControlledException(TOKEN_NOT_FOUND));
+        var token = getToken(tokenUpdateDTO.getTokenId());
 
         if(!tokenUpdateDTO.getFcmToken().isEmpty())
             token.setFcmToken(tokenUpdateDTO.getFcmToken());
@@ -40,8 +39,7 @@ public class TokenService {
     }
 
     public Token delete(Long tokenId) {
-        var token = tokenRepository.findByTokenId(tokenId)
-                .orElseThrow(()->new ControlledException(TOKEN_NOT_FOUND));
+        var token = getToken(tokenId);
 
         tokenRepository.deleteByTokenId(tokenId);
         return token;

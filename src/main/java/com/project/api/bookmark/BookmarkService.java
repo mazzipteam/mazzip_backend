@@ -30,8 +30,7 @@ public class BookmarkService {
     }
 
     public Bookmark delete(Long bookmarkId) {
-        var bookmark = bookmarkRepository.findByBookmarkId(bookmarkId)
-                .orElseThrow(()->new ControlledException(BOOKMARK_NOT_FOUND));
+        var bookmark = getBookmark(bookmarkId);
 
         bookmarkRepository.deleteByBookmarkId(bookmarkId);
         return bookmark;

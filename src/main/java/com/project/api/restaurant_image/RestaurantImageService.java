@@ -37,8 +37,7 @@ public class RestaurantImageService {
     }
 
     public RestaurantImage update(RestaurantImageUpdateDTO restaurantImageUpdateDTO) {
-        var restaurantImage = restaurantImageRepository.findByRestaurantImageId(restaurantImageUpdateDTO.getRestaurantImageId())
-                .orElseThrow(()->new ControlledException(RESTAURANT_IMAGE_NOT_FOUND));
+        var restaurantImage = getRestaurantImage(restaurantImageUpdateDTO.getRestaurantImageId());
 
         if(!restaurantImageUpdateDTO.getForeGround().isEmpty()){
             try {
@@ -69,8 +68,7 @@ public class RestaurantImageService {
     }
 
     public RestaurantImage delete(Long restaurantImageId) {
-        var restaurantImage = restaurantImageRepository.findByRestaurantImageId(restaurantImageId)
-                .orElseThrow(()->new ControlledException(RESTAURANT_IMAGE_NOT_FOUND));
+        var restaurantImage = getRestaurantImage(restaurantImageId);
 
         restaurantImageRepository.deleteByRestaurantImageId(restaurantImageId);
         return restaurantImage;

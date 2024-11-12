@@ -47,8 +47,7 @@ public class ReservationService {
     }
 
     public Reservation update(ReservationUpdateDTO reservationUpdateDTO) {
-        var reservation = reservationRepository.findByReservationId(reservationUpdateDTO.getReservationId())
-                .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND));
+        var reservation = getReservation(reservationUpdateDTO.getReservationId());
 
         // TODO: 식당 운영시간도 예외처리 할 것(현재는 식당 운영시간 정보 없음)
         if(!reservationUpdateDTO.getTime().isEmpty()) {
@@ -85,14 +84,13 @@ public class ReservationService {
     }
 
     public Reservation delete(Long reservationId) {
-        var reservation = reservationRepository.findByReservationId(reservationId)
-                .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND));
+        var reservation = getReservation(reservationId);
 
         reservationRepository.deleteByReservationId(reservationId);
         return reservation;
     }
 
-    public Reservation getMyClothes(Long reservationId) {
+    public Reservation getReservation(Long reservationId) {
         var reservation = reservationRepository.findByReservationId(reservationId)
                 .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND));
 

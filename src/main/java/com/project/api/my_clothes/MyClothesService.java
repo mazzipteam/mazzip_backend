@@ -38,8 +38,7 @@ public class MyClothesService {
     }
 
     public MyClothes update(MyClothesUpdateDTO myClothesUpdateDTO) {
-        var myClothes = myClothesRepository.findByMyClothesId(myClothesUpdateDTO.getMyClothesId())
-                .orElseThrow(() -> new ControlledException(MY_CLOTHES_NOT_FOUND));
+        var myClothes = getMyClothes(myClothesUpdateDTO.getMyClothesId());
 
         if(myClothesUpdateDTO.getWear() != null){
             if(!myClothesUpdateDTO.getWear().equals('Y')&&!myClothesUpdateDTO.getWear().equals('N'))
@@ -52,8 +51,7 @@ public class MyClothesService {
     }
 
     public MyClothes delete(Long myClothesId) {
-        var myClothes = myClothesRepository.findByMyClothesId(myClothesId)
-                .orElseThrow(() -> new ControlledException(MY_CLOTHES_NOT_FOUND));
+        var myClothes = getMyClothes(myClothesId);
 
         myClothesRepository.deleteByMyClothesId(myClothesId);
         return myClothes;
