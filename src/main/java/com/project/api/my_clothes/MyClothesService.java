@@ -25,7 +25,7 @@ public class MyClothesService {
         var clothes = clothesService.getClothes(myClothesCreateDTO.getClothesId());
 
         // 1. [예외처리] 이미 획득한 의상을 다시한번 생성하는 경우
-        if(myClothesRepository.findByAvatarIdAndMyClothesId(avatar.getAvatarId(), clothes.getClothesId()).isPresent())
+        if(myClothesRepository.findByAvatarAndMyClothesId(avatar, clothes.getClothesId()).isPresent())
             throw new ControlledException(MY_CLOTHES_ALREADY_EXISTS);
 
         var myClothes = MyClothes.builder()
@@ -65,7 +65,9 @@ public class MyClothesService {
     }
 
     public List<MyClothes> getAllMyClothes(Long avatarId) {
-        var allMyClothes = myClothesRepository.findByAvatarId(avatarId)
+        var avatar = avatarService.getAvatar(avatarId);
+
+        var allMyClothes = myClothesRepository.findByAvatar(avatar)
                 .orElseThrow(() -> new ControlledException(MY_CLOTHES_NOT_FOUND_IN_AVATAR));
 
         return allMyClothes;

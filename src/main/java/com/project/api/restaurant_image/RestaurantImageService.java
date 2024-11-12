@@ -19,11 +19,11 @@ public class RestaurantImageService {
     private final RestaurantService restaurantService;
 
     public RestaurantImage create(RestaurantImageCreateDTO restaurantImageCreateDTO) {
-        // 1. [예외처리] 이미 식당에 이미지가 존재하는 경우
-        if(restaurantImageRepository.findByRestaurantId(restaurantImageCreateDTO.getRestaurantId()).isPresent())
-            throw new ControlledException(RESTAURANT_IMAGE_ALREADY_EXISTS);
-
         var restaurant = restaurantService.getRestaurant(restaurantImageCreateDTO.getRestaurantId());
+
+        // 1. [예외처리] 이미 식당에 이미지가 존재하는 경우
+        if(restaurantImageRepository.findByRestaurant(restaurant).isPresent())
+            throw new ControlledException(RESTAURANT_IMAGE_ALREADY_EXISTS);
 
         var restaurantImage = RestaurantImage.builder()
                 .restaurant(restaurant)
