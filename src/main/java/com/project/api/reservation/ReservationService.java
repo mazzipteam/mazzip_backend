@@ -2,6 +2,7 @@ package com.project.api.reservation;
 
 import com.project.api.reservation.dto.ReservationCreateDTO;
 import com.project.api.reservation.dto.ReservationUpdateDTO;
+import com.project.entity.reservation.Reservation;
 import com.project.api.restaurant.RestaurantService;
 import com.project.api.user.UserService;
 import com.project.exception.ControlledException;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static com.project.api.reservation.ReservationErrorCode.*;
+import static com.project.exception.error_code.ReservationErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package com.project.api.reservation;
+package com.project.entity.reservation;
 
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
