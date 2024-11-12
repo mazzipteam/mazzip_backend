@@ -38,7 +38,7 @@ public class ClothesService {
     public Clothes update(ClothesUpdateDTO clothesUpdateDTO) {
         var clothes = getClothes(clothesUpdateDTO.getClothesId());
 
-        if(!clothesUpdateDTO.getName().isEmpty()) {
+        if(clothesUpdateDTO.getName()!= null) {
             // 1. [예외처리] 이미 존재하는 의상명
             if(clothesRepository.findByName(clothesUpdateDTO.getName()).isPresent())
                 throw new ControlledException(CLOTHES_NAME_ALREADY_EXISTS);
@@ -46,7 +46,7 @@ public class ClothesService {
             clothes.setName(clothesUpdateDTO.getName());
         }
 
-        if(!clothesUpdateDTO.getCategory().isEmpty()) {
+        if(clothesUpdateDTO.getCategory()!= null) {
             // 2. [예외처리] 잘못된 형식의 카테고리
             Category category;
             try {
@@ -58,7 +58,7 @@ public class ClothesService {
             clothes.setCategory(category);
         }
 
-        if(!clothesUpdateDTO.getImage().isEmpty()){
+        if(clothesUpdateDTO.getImage()!= null){
             try {
                 clothes.setImage(clothesUpdateDTO.getImage().getBytes());
             } catch (IllegalArgumentException e) {
@@ -66,7 +66,7 @@ public class ClothesService {
             }
         }
         
-        if(!clothesUpdateDTO.getCost().isEmpty()) {
+        if(clothesUpdateDTO.getCost()!= null) {
             // 3. [예외처리] 숫자가 아닌 문자열 반환
             try {
                 clothes.setCost(Integer.valueOf(clothesUpdateDTO.getCost()));

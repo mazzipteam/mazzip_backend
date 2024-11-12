@@ -39,7 +39,7 @@ public class RestaurantImageService {
     public RestaurantImage update(RestaurantImageUpdateDTO restaurantImageUpdateDTO) {
         var restaurantImage = getRestaurantImage(restaurantImageUpdateDTO.getRestaurantImageId());
 
-        if(!restaurantImageUpdateDTO.getForeGround().isEmpty()){
+        if(restaurantImageUpdateDTO.getForeGround()!= null){
             try {
                 restaurantImage.setForeGround(restaurantImageUpdateDTO.getForeGround().getBytes());
             } catch (IllegalArgumentException e) {
@@ -47,7 +47,7 @@ public class RestaurantImageService {
             }
         }
 
-        if(!restaurantImageUpdateDTO.getInterior().isEmpty()){
+        if(restaurantImageUpdateDTO.getInterior()!= null){
             try {
                 restaurantImage.setInterior(restaurantImageUpdateDTO.getInterior().getBytes());
             } catch (IllegalArgumentException e) {
@@ -55,7 +55,7 @@ public class RestaurantImageService {
             }
         }
 
-        if(!restaurantImageUpdateDTO.getMenu().isEmpty()){
+        if(restaurantImageUpdateDTO.getMenu()!= null){
             try {
                 restaurantImage.setMenu(restaurantImageUpdateDTO.getMenu().getBytes());
             } catch (IllegalArgumentException e) {

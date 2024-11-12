@@ -74,37 +74,37 @@ public class RestaurantService {
         if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).isPresent())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
-        if(!restaurantUpdateDTO.getTakeOut().isEmpty()
+        if(restaurantUpdateDTO.getTakeOut()!= null
                 && !restaurantUpdateDTO.getTakeOut().equals("Y")
                 && !restaurantUpdateDTO.getTakeOut().equals("N"))
             throw new ControlledException(TAKE_OUT_OF_INCORRECT_FORMAT);
 
         var restaurant = getRestaurant(restaurantUpdateDTO.getRestaurantId());
 
-        if(!restaurantUpdateDTO.getName().isEmpty())
+        if(restaurantUpdateDTO.getName()!= null)
             restaurant.setName(restaurantUpdateDTO.getName());
 
-        if(!restaurantUpdateDTO.getAddress().isEmpty())
+        if(restaurantUpdateDTO.getAddress()!= null)
             restaurant.setName(restaurantUpdateDTO.getAddress());
 
-        if(!restaurantUpdateDTO.getBusinessName().isEmpty())
+        if(restaurantUpdateDTO.getBusinessName()!= null)
             restaurant.setName(restaurantUpdateDTO.getBusinessName());
 
-        if(!restaurantUpdateDTO.getPropritor().isEmpty())
+        if(restaurantUpdateDTO.getPropritor()!= null)
             restaurant.setName(restaurantUpdateDTO.getPropritor());
 
         restaurant.setCategory(category);
 
-        if(!restaurantUpdateDTO.getLatLng().isEmpty())
+        if(restaurantUpdateDTO.getLatLng()!= null)
             restaurant.setName(restaurantUpdateDTO.getLatLng());
 
-        if(!restaurantUpdateDTO.getTelNum().isEmpty())
+        if(restaurantUpdateDTO.getTelNum()!= null)
             restaurant.setName(restaurantUpdateDTO.getTelNum());
 
-        if(!restaurantUpdateDTO.getTakeOut().isEmpty())
+        if(restaurantUpdateDTO.getTakeOut()!= null)
             restaurant.setName(restaurantUpdateDTO.getTakeOut());
 
-        if(!restaurantUpdateDTO.getUserId().isEmpty()){
+        if(restaurantUpdateDTO.getUserId()!= null){
             var userId = Long.getLong(restaurantUpdateDTO.getUserId());
             var user = userService.getUser(userId);
             restaurant.setUser(user);

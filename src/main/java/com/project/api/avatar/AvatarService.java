@@ -31,7 +31,7 @@ public class AvatarService {
     public Avatar update(AvatarUpdateDTO avatarUpdateDTO) {
         var avatar = getAvatar(avatarUpdateDTO.getAvatarId());
 
-        if(!avatarUpdateDTO.getName().isEmpty())
+        if(avatarUpdateDTO.getName()!= null)
             avatar.setName(avatarUpdateDTO.getName());
 
         avatarRepository.save(avatar);

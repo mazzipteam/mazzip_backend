@@ -38,10 +38,10 @@ public class MemoService {
     public Memo update(MemoUpdateDTO memoUpdateDTO) {
         var memo = getMemo(memoUpdateDTO.getMemoId());
 
-        if(!memoUpdateDTO.getTitle().isEmpty())
+        if(memoUpdateDTO.getTitle()!= null)
             memo.setTitle(memoUpdateDTO.getTitle());
 
-        if(!memoUpdateDTO.getDescription().isEmpty())
+        if(memoUpdateDTO.getDescription()!= null)
             memo.setDescription(memoUpdateDTO.getDescription());
 
         memo.setUpdatedAt(LocalDateTime.now());

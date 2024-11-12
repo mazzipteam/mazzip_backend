@@ -68,19 +68,19 @@ public class UserService {
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
 
         var user = getUser(userUpdateDTO.getUserId());
-        if(!userUpdateDTO.getPassword().isEmpty())
+        if(userUpdateDTO.getPassword() != null)
             user.setPassword(userUpdateDTO.getPassword());
 
-        if(!userUpdateDTO.getNickName().isEmpty())
+        if(userUpdateDTO.getNickName()!= null)
             user.setNickName(userUpdateDTO.getNickName());
 
-        if(!userUpdateDTO.getTelNum().isEmpty())
+        if(userUpdateDTO.getTelNum()!= null)
             user.setTelNum(userUpdateDTO.getTelNum());
 
-        if(!userUpdateDTO.getAddress().isEmpty())
+        if(userUpdateDTO.getAddress()!= null)
             user.setAddress(userUpdateDTO.getAddress());
 
-        if(!userUpdateDTO.getDetailAddress().isEmpty())
+        if(userUpdateDTO.getDetailAddress()!= null)
             user.setDetailAddress(userUpdateDTO.getDetailAddress());
 
         user.setUpdatedAt(LocalDateTime.now());

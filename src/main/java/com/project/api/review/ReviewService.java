@@ -7,7 +7,6 @@ import com.project.api.user.UserService;
 import com.project.entity.Review;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -43,13 +42,13 @@ public class ReviewService {
     public Review update(ReviewUpdateDTO reviewUpdateDTO) {
         var review = getReview(reviewUpdateDTO.getReviewId());
 
-        if(!reviewUpdateDTO.getTitle().isEmpty())
+        if(reviewUpdateDTO.getTitle()!= null)
             review.setTitle(reviewUpdateDTO.getTitle());
 
-        if(!reviewUpdateDTO.getDescription().isEmpty())
+        if(reviewUpdateDTO.getDescription()!= null)
             review.setDescription(reviewUpdateDTO.getDescription());
 
-        if(!reviewUpdateDTO.getImage().isEmpty()){
+        if(reviewUpdateDTO.getImage()!= null){
             // 1. [예외처리] 잘못된 형식의 이미지
             try {
                 review.setImage(reviewUpdateDTO.getImage().getBytes());

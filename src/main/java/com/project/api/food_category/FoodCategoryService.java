@@ -35,7 +35,7 @@ public class FoodCategoryService {
 
         var foodCategory = getFoodCategory(foodCategoryUpdateDTO.getFoodCategoryId());
 
-        if(!foodCategoryUpdateDTO.getName().isEmpty())
+        if(foodCategoryUpdateDTO.getName()!= null)
             foodCategory.setName(foodCategoryUpdateDTO.getName());
 
         foodCategoryRepository.save(foodCategory);

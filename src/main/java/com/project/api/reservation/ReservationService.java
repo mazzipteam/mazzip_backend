@@ -50,7 +50,7 @@ public class ReservationService {
         var reservation = getReservation(reservationUpdateDTO.getReservationId());
 
         // TODO: 식당 운영시간도 예외처리 할 것(현재는 식당 운영시간 정보 없음)
-        if(!reservationUpdateDTO.getTime().isEmpty()) {
+        if(reservationUpdateDTO.getTime()!= null) {
             LocalDateTime time;
             // 1. [예외처리] time이 LocalDateTime의 형식이 아닌 경우
             try {
@@ -65,7 +65,7 @@ public class ReservationService {
             reservation.setTime(time);
         }
 
-        if(!reservationUpdateDTO.getPeople().isEmpty()) {
+        if(reservationUpdateDTO.getPeople()!= null) {
             // 3. [예외처리] people이 Integer의 형식이 아닌 경우
             try {
                 Integer people = Integer.parseInt(reservationUpdateDTO.getPeople());

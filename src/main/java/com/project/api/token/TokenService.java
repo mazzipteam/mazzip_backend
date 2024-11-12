@@ -31,7 +31,7 @@ public class TokenService {
     public Token update(TokenUpdateDTO tokenUpdateDTO) {
         var token = getToken(tokenUpdateDTO.getTokenId());
 
-        if(!tokenUpdateDTO.getFcmToken().isEmpty())
+        if(tokenUpdateDTO.getFcmToken()!= null)
             token.setFcmToken(tokenUpdateDTO.getFcmToken());
 
         tokenRepository.save(token);
