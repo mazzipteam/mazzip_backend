@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MemoRepository extends JpaRepository<Memo, Integer> {
+public interface MemoRepository extends JpaRepository<Memo, Long> {
     Optional<Memo> findByMemoId(Long memoId);
 
     void deleteByMemoId(Long memoId);

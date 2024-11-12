@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface BookmarkRepository extends JpaRepository<Bookmark, Integer> {
+public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     Optional<Bookmark> findByBookmarkId(Long bookmarkId);
 
     void deleteByBookmarkId(Long bookmarkId);
