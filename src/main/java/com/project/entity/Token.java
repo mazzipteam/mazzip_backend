@@ -1,4 +1,4 @@
-package com.project.api.token;
+package com.project.entity;
 
 import com.project.entity.user.User;
 import jakarta.persistence.*;

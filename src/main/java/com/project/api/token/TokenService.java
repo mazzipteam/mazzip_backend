@@ -1,11 +1,14 @@
 package com.project.api.token;
 
+import com.project.api.token.dto.TokenCreateDTO;
+import com.project.api.token.dto.TokenUpdateDTO;
 import com.project.api.user.UserService;
+import com.project.entity.Token;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.api.token.TokenErrorCode.TOKEN_NOT_FOUND;
+import static com.project.exception.error_code.TokenErrorCode.TOKEN_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
