@@ -16,6 +16,6 @@ public class RestaurantCreateDTO {
     //private Region region;
     private String latLng; // 위경도에 대한 JSON 값 저장
     private String telNum;
-    private char takeOut;
+    private Character takeOut;
     private Long userId;
 }

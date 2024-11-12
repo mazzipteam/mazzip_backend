@@ -20,7 +20,7 @@ public class RestaurantService {
         if(!isValidTelNum(restaurantCreateDTO.getTelNum()))
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
-        // 2. [예외처리] 존재하지 않는 카테고리
+        // 2. [예외처리] 잘못된 형식의 카테고리
         Category category;
         try {
             category = Category.valueOf(restaurantCreateDTO.getCategory());
@@ -58,7 +58,7 @@ public class RestaurantService {
         if(!isValidTelNum(restaurantUpdateDTO.getTelNum()))
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
-        // 2. [예외처리] 존재하지 않는 카테고리
+        // 2. [예외처리] 잘못된 형식의 카테고리
         Category category;
         try {
             category = Category.valueOf(restaurantUpdateDTO.getCategory());

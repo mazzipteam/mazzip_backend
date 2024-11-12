@@ -1,4 +1,4 @@
-package com.project.api.foodcategory;
+package com.project.api.clothes;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,21 +10,21 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "food_category")
-public class FoodCategory {
+@Table(name = "clothes")
+public class Clothes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long foodCategoryId;
+    private Long clothesId;
 
     @Column(unique = true, nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private Integer schToday = 0;
+    private Category category;
 
     @Column(nullable = false)
-    private Integer schWeek = 0;
+    private byte[] image;
 
     @Column(nullable = false)
-    private Integer schMonth = 0;
+    private Integer cost;
 }

@@ -47,7 +47,7 @@ public class Restaurant {
     private String telNum; // TODO: 전화번호 서식 검사
 
     @Column(nullable = false)
-    private char takeOut = 'N';
+    private Character takeOut = 'N';
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
