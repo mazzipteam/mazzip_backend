@@ -66,6 +66,10 @@ public class RestaurantService {
             throw new ControlledException(CATEGORY_OF_INCORRECT_FORMAT);
         }
 
+        // 3. [예외처리] 이미 존재하는 맛집명
+        if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).orElse(null) != null)
+            throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
+
         var restaurant = restaurantRepository.findByRestaurantId(restaurantUpdateDTO.getRestaurantId())
                 .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
 

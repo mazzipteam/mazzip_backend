@@ -83,6 +83,8 @@ public class UserService {
         if(userUpdateDTO.getDetailAddress() != null)
             user.setDetailAddress(userUpdateDTO.getDetailAddress());
 
+        user.setUpdatedAt(LocalDateTime.now());
+
         userRepository.save(user);
         return user;
     }
