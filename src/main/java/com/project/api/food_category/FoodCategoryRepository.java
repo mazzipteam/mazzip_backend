@@ -1,4 +1,4 @@
-package com.project.api.foodcategory;
+package com.project.api.food_category;
 
 import com.project.entity.FoodCategory;
 import org.springframework.data.jpa.repository.JpaRepository;

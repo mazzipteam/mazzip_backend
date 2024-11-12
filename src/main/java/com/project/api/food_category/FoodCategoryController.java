@@ -1,7 +1,7 @@
-package com.project.api.foodcategory;
+package com.project.api.food_category;
 
-import com.project.api.foodcategory.dto.FoodCategoryCreateDTO;
-import com.project.api.foodcategory.dto.FoodCategoryUpdateDTO;
+import com.project.api.food_category.dto.FoodCategoryCreateDTO;
+import com.project.api.food_category.dto.FoodCategoryUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

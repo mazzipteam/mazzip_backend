@@ -37,7 +37,7 @@ public class User {
     private String detailAddress;
 
     @Column(nullable = false)
-    private LocalDateTime createAt;
+    private LocalDateTime createAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private LocalDateTime updatedAt;

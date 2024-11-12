@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
-import static com.project.exception.errorcode.UserErrorCode.*;
+import static com.project.exception.error_code.UserErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +50,6 @@ public class UserService {
                 .telNum(userCreateDTO.getTelNum())
                 .address(userCreateDTO.getAddress())
                 .detailAddress(userCreateDTO.getDetailAddress())
-                .createAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .role(role)
                 .build();

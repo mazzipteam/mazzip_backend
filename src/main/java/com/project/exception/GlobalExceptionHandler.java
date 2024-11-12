@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.project.exception.errorcode.BasicErrorCode.DATA_BASE_ERROR;
-import static com.project.exception.errorcode.BasicErrorCode.ERROR_NOT_FOUND;
+import static com.project.exception.error_code.BasicErrorCode.DATA_BASE_ERROR;
+import static com.project.exception.error_code.BasicErrorCode.ERROR_NOT_FOUND;
 
 @Log4j2
 @RestControllerAdvice

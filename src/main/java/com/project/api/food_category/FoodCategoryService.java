@@ -1,14 +1,14 @@
-package com.project.api.foodcategory;
+package com.project.api.food_category;
 
-import com.project.api.foodcategory.dto.FoodCategoryCreateDTO;
-import com.project.api.foodcategory.dto.FoodCategoryUpdateDTO;
+import com.project.api.food_category.dto.FoodCategoryCreateDTO;
+import com.project.api.food_category.dto.FoodCategoryUpdateDTO;
 import com.project.entity.FoodCategory;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.exception.errorcode.FoodCategoryErrorCode.FOOD_CATEGORY_NAME_ALREADY_EXISTS;
-import static com.project.exception.errorcode.FoodCategoryErrorCode.FOOD_CATEGORY_NOT_FOUND;
+import static com.project.exception.error_code.FoodCategoryErrorCode.FOOD_CATEGORY_NAME_ALREADY_EXISTS;
+import static com.project.exception.error_code.FoodCategoryErrorCode.FOOD_CATEGORY_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

@@ -8,7 +8,7 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.exception.errorcode.ClothesErrorCode.*;
+import static com.project.exception.error_code.ClothesErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

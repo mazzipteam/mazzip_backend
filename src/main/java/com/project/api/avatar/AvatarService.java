@@ -8,7 +8,7 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.exception.errorcode.AvatarErrorCode.AVATAR_NOT_FOUND;
+import static com.project.exception.error_code.AvatarErrorCode.AVATAR_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

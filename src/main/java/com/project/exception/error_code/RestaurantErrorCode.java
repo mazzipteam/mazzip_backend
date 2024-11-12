@@ -1,4 +1,4 @@
-package com.project.exception.errorcode;
+package com.project.exception.error_code;
 
 import com.project.exception.ErrorMessage;
 

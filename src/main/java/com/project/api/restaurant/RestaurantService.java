@@ -9,8 +9,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.exception.errorcode.RestaurantErrorCode.*;
-import static com.project.exception.errorcode.UserErrorCode.TELNUM_OF_INCORRECT_FORMAT;
+import static com.project.exception.error_code.RestaurantErrorCode.*;
+import static com.project.exception.error_code.UserErrorCode.TELNUM_OF_INCORRECT_FORMAT;
 import static com.project.api.user.UserService.isValidTelNum;
 
 @Service
