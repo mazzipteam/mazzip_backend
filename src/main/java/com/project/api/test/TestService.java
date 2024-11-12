@@ -2,7 +2,6 @@ package com.project.api.test;
 
 import com.project.api.test.dto.TestAccessDTO;
 import com.project.api.test.dto.TestCreateDTO;
-import com.project.entity.Test;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

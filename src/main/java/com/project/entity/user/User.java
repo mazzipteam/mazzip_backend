@@ -40,7 +40,7 @@ public class User {
     private LocalDateTime createAt = LocalDateTime.now();
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private Role role = Role.USER;

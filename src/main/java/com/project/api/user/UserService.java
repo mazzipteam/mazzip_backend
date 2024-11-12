@@ -50,7 +50,6 @@ public class UserService {
                 .telNum(userCreateDTO.getTelNum())
                 .address(userCreateDTO.getAddress())
                 .detailAddress(userCreateDTO.getDetailAddress())
-                .updatedAt(LocalDateTime.now())
                 .role(role)
                 .build();
 
