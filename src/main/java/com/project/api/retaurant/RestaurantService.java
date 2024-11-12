@@ -70,6 +70,11 @@ public class RestaurantService {
         if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).isEmpty())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
+        if(!restaurantUpdateDTO.getTakeOut().isEmpty()
+                && !restaurantUpdateDTO.getTakeOut().equals("Y")
+                && !restaurantUpdateDTO.getTakeOut().equals("N"))
+            throw new ControlledException(TAKE_OUT_OF_INCORRECT_FORMAT);
+
         var restaurant = restaurantRepository.findByRestaurantId(restaurantUpdateDTO.getRestaurantId())
                 .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
 

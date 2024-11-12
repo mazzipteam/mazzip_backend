@@ -55,12 +55,21 @@ public class ClothesService {
             clothes.setCategory(category);
         }
 
-        if(!clothesUpdateDTO.getImage().isEmpty())
-            clothes.setImage(clothesUpdateDTO.getImage().getBytes());
+        if(!clothesUpdateDTO.getImage().isEmpty()){
+            try {
+                clothes.setImage(clothesUpdateDTO.getImage().getBytes());
+            } catch (IllegalArgumentException e) {
+                throw new ControlledException(IMAGE_OF_INCORRECT_FORMAT);
+            }
+        }
         
         if(!clothesUpdateDTO.getCost().isEmpty()) {
-            // TODO: 반환받은 문자열이 숫자인지 예외처리
-            clothes.setCost(Integer.valueOf(clothesUpdateDTO.getCost()));
+            // 3. [예외처리] 숫자가 아닌 문자열 반환
+            try {
+                clothes.setCost(Integer.valueOf(clothesUpdateDTO.getCost()));
+            } catch (NumberFormatException e) {
+                throw new ControlledException(COST_OF_INCORRECT_FORMAT);
+            }
         }
 
         clothesRepository.save(clothes);
