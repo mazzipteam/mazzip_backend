@@ -27,7 +27,9 @@ public class MyClothes {
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 
+    @Column(nullable = false)
     private Character wear = 'N';
 
+    @Column(nullable = false)
     private LocalDateTime purchaseTime = LocalDateTime.now();
 }
