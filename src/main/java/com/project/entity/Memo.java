@@ -1,4 +1,4 @@
-package com.project.api.memo;
+package com.project.entity;
 
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;

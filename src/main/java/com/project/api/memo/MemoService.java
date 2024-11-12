@@ -4,11 +4,14 @@ import com.project.api.memo.dto.MemoCreateDTO;
 import com.project.api.memo.dto.MemoUpdateDTO;
 import com.project.api.restaurant.RestaurantService;
 import com.project.api.user.UserService;
+import com.project.entity.Memo;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.api.memo.MemoErrorCode.MEMO_NOT_FOUND;
+import java.time.LocalDateTime;
+
+import static com.project.exception.error_code.MemoErrorCode.MEMO_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +44,8 @@ public class MemoService {
 
         if(!memoUpdateDTO.getDescription().isEmpty())
             memo.setDescription(memoUpdateDTO.getDescription());
+
+        memo.setUpdatedAt(LocalDateTime.now());
 
         memoRepository.save(memo);
         return memo;
