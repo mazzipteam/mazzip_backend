@@ -35,7 +35,7 @@ public class RestaurantService {
         //TODO: region이 업데이트 되는 경우, region에 대한 예외처리 필요
 
         // 3. [예외처리] 이미 존재하는 맛집명
-        if(restaurantRepository.findByName(restaurantCreateDTO.getName()).isEmpty())
+        if(restaurantRepository.findByName(restaurantCreateDTO.getName()).isPresent())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
         var user = userService.getUser(restaurantCreateDTO.getUserId());
@@ -71,7 +71,7 @@ public class RestaurantService {
         }
 
         // 3. [예외처리] 이미 존재하는 맛집명
-        if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).isEmpty())
+        if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).isPresent())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
         if(!restaurantUpdateDTO.getTakeOut().isEmpty()
@@ -82,32 +82,34 @@ public class RestaurantService {
         var restaurant = restaurantRepository.findByRestaurantId(restaurantUpdateDTO.getRestaurantId())
                 .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
 
-        if(restaurantUpdateDTO.getName() != null)
+        if(!restaurantUpdateDTO.getName().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getName());
 
-        if(restaurantUpdateDTO.getAddress() != null)
+        if(!restaurantUpdateDTO.getAddress().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getAddress());
 
-        if(restaurantUpdateDTO.getBusinessName() != null)
+        if(!restaurantUpdateDTO.getBusinessName().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getBusinessName());
 
-        if(restaurantUpdateDTO.getPropritor() != null)
+        if(!restaurantUpdateDTO.getPropritor().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getPropritor());
 
         restaurant.setCategory(category);
 
-        if(restaurantUpdateDTO.getLatLng() != null)
+        if(!restaurantUpdateDTO.getLatLng().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getLatLng());
 
-        if(restaurantUpdateDTO.getTelNum() != null)
+        if(!restaurantUpdateDTO.getTelNum().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getTelNum());
 
-        if(restaurantUpdateDTO.getTakeOut() != null)
+        if(!restaurantUpdateDTO.getTakeOut().isEmpty())
             restaurant.setName(restaurantUpdateDTO.getTakeOut());
 
-        var userId = Long.getLong(restaurantUpdateDTO.getUserId());
-        var user = userService.getUser(userId);
-        restaurant.setUser(user);
+        if(!restaurantUpdateDTO.getUserId().isEmpty()){
+            var userId = Long.getLong(restaurantUpdateDTO.getUserId());
+            var user = userService.getUser(userId);
+            restaurant.setUser(user);
+        }
 
         restaurantRepository.save(restaurant);
         return restaurant;

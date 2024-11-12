@@ -1,4 +1,4 @@
-package com.project.api.my_clothes;
+package com.project.api.my_clothes.dto;
 
 import lombok.Builder;
 import lombok.Getter;

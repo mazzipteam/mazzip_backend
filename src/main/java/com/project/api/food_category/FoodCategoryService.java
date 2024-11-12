@@ -17,7 +17,7 @@ public class FoodCategoryService {
 
     public FoodCategory create(FoodCategoryCreateDTO foodCategoryCreateDTO) {
         // 1. [예외처리] 이미 존재하는 음식 카테고리명
-        if(foodCategoryRepository.findByName(foodCategoryCreateDTO.getName()).isEmpty())
+        if(foodCategoryRepository.findByName(foodCategoryCreateDTO.getName()).isPresent())
             throw new ControlledException(FOOD_CATEGORY_NAME_ALREADY_EXISTS);
 
         var foodCategory = FoodCategory.builder()
@@ -30,13 +30,13 @@ public class FoodCategoryService {
 
     public FoodCategory update(FoodCategoryUpdateDTO foodCategoryUpdateDTO) {
         // 1. [예외처리] 이미 존재하는 음식 카테고리명
-        if(foodCategoryRepository.findByName(foodCategoryUpdateDTO.getName()).isEmpty())
+        if(foodCategoryRepository.findByName(foodCategoryUpdateDTO.getName()).isPresent())
             throw new ControlledException(FOOD_CATEGORY_NAME_ALREADY_EXISTS);
 
         var foodCategory = foodCategoryRepository.findByFoodCategoryId(foodCategoryUpdateDTO.getFoodCategoryId())
                 .orElseThrow(() -> new ControlledException(FOOD_CATEGORY_NOT_FOUND));
 
-        if(foodCategoryUpdateDTO.getName() != null)
+        if(!foodCategoryUpdateDTO.getName().isEmpty())
             foodCategory.setName(foodCategoryUpdateDTO.getName());
 
         foodCategoryRepository.save(foodCategory);

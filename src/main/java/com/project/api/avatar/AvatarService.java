@@ -32,7 +32,7 @@ public class AvatarService {
         var avatar = avatarRepository.findByAvatarId(avatarUpdateDTO.getAvatarId())
                 .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND));
 
-        if(avatarUpdateDTO.getName() != null)
+        if(!avatarUpdateDTO.getName().isEmpty())
             avatar.setName(avatarUpdateDTO.getName());
 
         avatarRepository.save(avatar);

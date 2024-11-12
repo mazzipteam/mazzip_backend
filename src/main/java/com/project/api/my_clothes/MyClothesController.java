@@ -1,5 +1,7 @@
 package com.project.api.my_clothes;
 
+import com.project.api.my_clothes.dto.MyClothesCreateDTO;
+import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

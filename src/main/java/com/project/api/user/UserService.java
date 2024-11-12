@@ -28,11 +28,11 @@ public class UserService {
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
         // 3. [예외처리] 이미 존재하는 email
-        if(userRepository.findByEmail(userCreateDTO.getEmail()).isEmpty())
+        if(userRepository.findByEmail(userCreateDTO.getEmail()).isPresent())
             throw new ControlledException(EMAIL_ALREADY_EXISTS);
 
         // 4. [예외처리] 이미 존재하는 nickName
-        if(userRepository.findByNickName(userCreateDTO.getNickName()).isEmpty())
+        if(userRepository.findByNickName(userCreateDTO.getNickName()).isPresent())
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
 
         // 5. [예외처리] 잘못된 형식의 role
@@ -65,25 +65,25 @@ public class UserService {
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
         // 2. [예외처리] 이미 존재하는 nickName
-        if(userRepository.findByNickName(userUpdateDTO.getNickName()).orElse(null) != null)
+        if(userRepository.findByNickName(userUpdateDTO.getNickName()).isPresent())
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
 
         var user = userRepository.findByUserId(userUpdateDTO.getUserId())
                 .orElseThrow(() -> new ControlledException(USER_NOT_FOUND));
 
-        if(userUpdateDTO.getPassword() != null)
+        if(!userUpdateDTO.getPassword().isEmpty())
             user.setPassword(userUpdateDTO.getPassword());
 
-        if(userUpdateDTO.getNickName() != null)
+        if(!userUpdateDTO.getNickName().isEmpty())
             user.setNickName(userUpdateDTO.getNickName());
 
-        if(userUpdateDTO.getTelNum() != null)
+        if(!userUpdateDTO.getTelNum().isEmpty())
             user.setTelNum(userUpdateDTO.getTelNum());
 
-        if(userUpdateDTO.getAddress() != null)
+        if(!userUpdateDTO.getAddress().isEmpty())
             user.setAddress(userUpdateDTO.getAddress());
 
-        if(userUpdateDTO.getDetailAddress() != null)
+        if(!userUpdateDTO.getDetailAddress().isEmpty())
             user.setDetailAddress(userUpdateDTO.getDetailAddress());
 
         user.setUpdatedAt(LocalDateTime.now());

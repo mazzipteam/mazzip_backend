@@ -2,6 +2,8 @@ package com.project.api.my_clothes;
 
 import com.project.api.avatar.AvatarService;
 import com.project.api.clothes.ClothesService;
+import com.project.api.my_clothes.dto.MyClothesCreateDTO;
+import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
 import com.project.entity.MyClothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
