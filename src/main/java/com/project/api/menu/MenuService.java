@@ -47,7 +47,7 @@ public class MenuService {
                 .orElseThrow(() -> new ControlledException(MENU_NOT_FOUND));
 
         if(menuUpdateDTO.getFoodCategoryId() != null){
-            // 1. 에러처리
+            // 1. [에러처리]
             try {
                 var foodCategory = foodCategoryService.getFoodCategory(Long.parseLong(menuUpdateDTO.getFoodCategoryId()));
                 menu.setFoodCategory(foodCategory);
@@ -60,7 +60,7 @@ public class MenuService {
             menu.setName(menuUpdateDTO.getName());
 
         if(menuUpdateDTO.getPrice() != null){
-            // 1. 에러처리
+            // 2. [에러처리]
             try {
                 menu.setPrice(Integer.parseInt(menuUpdateDTO.getPrice()));
             } catch (NumberFormatException e) {
@@ -72,12 +72,14 @@ public class MenuService {
             menu.setDescription(menuUpdateDTO.getDescription());
 
         if(menuUpdateDTO.getCheap() != null) {
+            // 3. [에러처리]
             if(!menuUpdateDTO.getCheap().equals("Y") && !menuUpdateDTO.getCheap().equals("N"))
                 throw new ControlledException(CHEAP_INCORRECT_FORMAT);
             menu.setCheap(menuUpdateDTO.getCheap().charAt(0));
         }
 
         if(menuUpdateDTO.getImage() != null) {
+            // 4. [에러처리]
             try {
                 menu.setImage(menuUpdateDTO.getImage().getBytes());
             } catch (IllegalArgumentException e) {
@@ -86,12 +88,14 @@ public class MenuService {
         }
 
         if(menuUpdateDTO.getMain() != null) {
+            // 5. [에러처리]
             if(!menuUpdateDTO.getMain().equals("Y") && !menuUpdateDTO.getMain().equals("N"))
                 throw new ControlledException(MAIN_INCORRECT_FORMAT);
             menu.setMain(menuUpdateDTO.getMain().charAt(0));
         }
 
         if(menuUpdateDTO.getIsReserve() != null) {
+            // 6. [에러처리]
             if(!menuUpdateDTO.getIsReserve().equals("Y") && !menuUpdateDTO.getIsReserve().equals("N"))
                 throw new ControlledException(IS_RESERVE_INCORRECT_FORMAT);
             menu.setIsReserve(menuUpdateDTO.getIsReserve().charAt(0));

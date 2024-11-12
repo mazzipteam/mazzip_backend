@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class RestaurantController {
     private final RestaurantService restaurantService;
 
+    // TODO: Category 반환하는 API도 있어야 할듯
+
     // 맛집 생성
     @PostMapping
     public ResponseEntity create(@RequestBody RestaurantCreateDTO restaurantCreateDTO) {

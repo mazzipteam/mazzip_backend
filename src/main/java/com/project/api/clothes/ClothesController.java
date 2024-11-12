@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class ClothesController {
     private final ClothesService clothesService;
 
+    // TODO: Category 반환하는 API도 있어야 할듯
+
     // 의상 생성
     @PostMapping
     public ResponseEntity create(@RequestBody ClothesCreateDTO clothesCreateDTO) {

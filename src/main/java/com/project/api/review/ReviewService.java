@@ -7,7 +7,10 @@ import com.project.api.user.UserService;
 import com.project.entity.Review;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 import static com.project.exception.error_code.ReviewErrorCode.IMAGE_OF_INCORRECT_FORMAT;
 import static com.project.exception.error_code.ReviewErrorCode.REVIEW_NOT_FOUND;
@@ -55,6 +58,7 @@ public class ReviewService {
                 throw new ControlledException(IMAGE_OF_INCORRECT_FORMAT);
             }
         }
+        review.setUpdatedAt(LocalDateTime.now());
 
         reviewRepository.save(review);
         return review;
