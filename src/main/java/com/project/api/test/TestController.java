@@ -1,5 +1,7 @@
 package com.project.api.test;
 
+import com.project.api.test.dto.TestAccessDTO;
+import com.project.api.test.dto.TestCreateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +21,16 @@ public class TestController {
 
     // Test 생성
     @PostMapping("testCreate")
-    public ResponseEntity testCreate(@RequestBody TestCreate testCreate) {
-        var test = testService.create(testCreate);
+    public ResponseEntity testCreate(@RequestBody TestCreateDTO testCreateDTO) {
+        var test = testService.create(testCreateDTO);
 
         return ResponseEntity.ok(CommonResponse.builder().code(200).message("계정 생성 성공").data(test).build());
     }
 
     // Test 조회
     @PostMapping("testAccess")
-    public ResponseEntity testAccess(@RequestBody TestAccess testAccess) {
-        var test = testService.access(testAccess);
+    public ResponseEntity testAccess(@RequestBody TestAccessDTO testAccessDTO) {
+        var test = testService.access(testAccessDTO);
 
         return ResponseEntity.ok(CommonResponse.builder().code(200).message("로그인 성공").data(test).build());
     }

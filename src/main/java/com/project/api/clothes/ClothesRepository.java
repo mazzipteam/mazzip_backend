@@ -1,5 +1,6 @@
 package com.project.api.clothes;
 
+import com.project.entity.clothes.Clothes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,14 @@
 package com.project.api.clothes;
 
+import com.project.api.clothes.dto.ClothesCreateDTO;
+import com.project.api.clothes.dto.ClothesUpdateDTO;
+import com.project.entity.clothes.Category;
+import com.project.entity.clothes.Clothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.api.clothes.ClothesErrorCode.*;
+import static com.project.exception.errorcode.ClothesErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

@@ -1,5 +1,7 @@
 package com.project.api.avatar;
 
+import com.project.api.avatar.dto.AvatarCreateDTO;
+import com.project.api.avatar.dto.AvatarUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

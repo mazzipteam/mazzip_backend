@@ -1,5 +1,8 @@
 package com.project.api.test;
 
+import com.project.api.test.dto.TestAccessDTO;
+import com.project.api.test.dto.TestCreateDTO;
+import com.project.entity.Test;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,9 +13,9 @@ public class TestService {
     private final TestRepository testRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Test access(TestAccess testAccess) {
+    public Test access(TestAccessDTO testAccessDTO) {
         // testParam2는 Unique이기 때문에 접근가능
-        var testParam2 = testAccess.getTestParam2();
+        var testParam2 = testAccessDTO.getTestParam2();
 
         // 1. id를 통해 해당 엔티티 불러오기
         var test = testRepository.findByTestParam2(testParam2)
@@ -21,11 +24,11 @@ public class TestService {
         return test;
     }
 
-    public Test create(TestCreate testCreate) {
+    public Test create(TestCreateDTO testCreateDTO) {
         var test = Test.builder()
-                .testParam1(testCreate.getTestParam1())
-                .testParam2(testCreate.getTestParam2())
-                .testParam3(testCreate.getTestParam3())
+                .testParam1(testCreateDTO.getTestParam1())
+                .testParam2(testCreateDTO.getTestParam2())
+                .testParam3(testCreateDTO.getTestParam3())
                 .build();
         testRepository.save(test);
         return test;

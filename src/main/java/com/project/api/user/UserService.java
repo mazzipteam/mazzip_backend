@@ -1,5 +1,9 @@
 package com.project.api.user;
 
+import com.project.api.user.dto.UserCreateDTO;
+import com.project.api.user.dto.UserUpdateDTO;
+import com.project.entity.user.Role;
+import com.project.entity.user.User;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
-import static com.project.api.user.UserErrorCode.*;
+import static com.project.exception.errorcode.UserErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

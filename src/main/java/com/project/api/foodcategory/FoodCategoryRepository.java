@@ -1,5 +1,6 @@
 package com.project.api.foodcategory;
 
+import com.project.entity.FoodCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
