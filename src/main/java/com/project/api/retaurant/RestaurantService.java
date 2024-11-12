@@ -31,7 +31,7 @@ public class RestaurantService {
         //TODO: region이 업데이트 되는 경우, region에 대한 예외처리 필요
 
         // 3. [예외처리] 이미 존재하는 맛집명
-        if(restaurantRepository.findByName(restaurantCreateDTO.getName()).orElse(null) != null)
+        if(restaurantRepository.findByName(restaurantCreateDTO.getName()).isEmpty())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
         var user = userService.getUser(restaurantCreateDTO.getUserId());
@@ -67,7 +67,7 @@ public class RestaurantService {
         }
 
         // 3. [예외처리] 이미 존재하는 맛집명
-        if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).orElse(null) != null)
+        if(restaurantRepository.findByName(restaurantUpdateDTO.getName()).isEmpty())
             throw new ControlledException(RESTAURANT_NAME_ALREADY_EXISTS);
 
         var restaurant = restaurantRepository.findByRestaurantId(restaurantUpdateDTO.getRestaurantId())

@@ -24,11 +24,11 @@ public class UserService {
             throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
 
         // 3. [예외처리] 이미 존재하는 email
-        if(userRepository.findByEmail(userCreateDTO.getEmail()).orElse(null) != null)
+        if(userRepository.findByEmail(userCreateDTO.getEmail()).isEmpty())
             throw new ControlledException(EMAIL_ALREADY_EXISTS);
 
         // 4. [예외처리] 이미 존재하는 nickName
-        if(userRepository.findByNickName(userCreateDTO.getNickName()).orElse(null) != null)
+        if(userRepository.findByNickName(userCreateDTO.getNickName()).isEmpty())
             throw new ControlledException(NICKNAME_ALREADY_EXISTS);
 
         // 5. [예외처리] 잘못된 형식의 role
