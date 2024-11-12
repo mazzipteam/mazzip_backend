@@ -1,5 +1,6 @@
 package com.project.api.bookmark;
 
+import com.project.entity.Bookmark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

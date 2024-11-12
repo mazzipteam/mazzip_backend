@@ -1,4 +1,4 @@
-package com.project.api.bookmark;
+package com.project.entity;
 
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;

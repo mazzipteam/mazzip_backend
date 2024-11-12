@@ -2,11 +2,12 @@ package com.project.api.bookmark;
 
 import com.project.api.restaurant.RestaurantService;
 import com.project.api.user.UserService;
+import com.project.entity.Bookmark;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.api.bookmark.BookmarkErrorCode.BOOKMARK_NOT_FOUND;
+import static com.project.exception.error_code.BookmarkErrorCode.BOOKMARK_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
