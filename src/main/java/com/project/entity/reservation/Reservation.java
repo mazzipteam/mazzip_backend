@@ -27,7 +27,7 @@ public class Reservation {
     private Integer people;
 
     @Column(nullable = false)
-    private State state = State.NOT_YET;
+    private State state;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

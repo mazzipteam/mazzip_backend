@@ -9,6 +9,7 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.project.entity.restraunt.Region.성북구;
 import static com.project.exception.error_code.RestaurantErrorCode.*;
 import static com.project.exception.error_code.UserErrorCode.TELNUM_OF_INCORRECT_FORMAT;
 import static com.project.api.user.UserService.isValidTelNum;
@@ -47,9 +48,11 @@ public class RestaurantService {
                 .propritor(restaurantCreateDTO.getPropritor())
                 .category(category)
                 //.region(restaurantCreateDTO.getRegion())
+                .region(성북구)
                 .latLng(restaurantCreateDTO.getLatLng()) // TODO: 위치 좌표 주입할 것
                 .telNum(restaurantCreateDTO.getTelNum())
                 .takeOut(restaurantCreateDTO.getTakeOut())
+                .rating(0.0)
                 .user(user)
                 .build();
 

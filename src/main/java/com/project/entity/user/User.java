@@ -37,10 +37,10 @@ public class User {
     private String detailAddress;
 
     @Column(nullable = false)
-    private LocalDateTime createAt = LocalDateTime.now();
+    private LocalDateTime createAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt;
 
     @Column(nullable = false)
     private Role role = Role.USER;

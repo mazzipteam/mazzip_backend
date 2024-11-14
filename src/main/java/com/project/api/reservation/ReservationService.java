@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import static com.project.entity.reservation.State.NOT_YET;
 import static com.project.exception.error_code.ReservationErrorCode.*;
 
 @Service
@@ -40,6 +41,7 @@ public class ReservationService {
                 .people(reservationCreateDTO.getPeople())
                 .customer(user)
                 .restaurant(restaurant)
+                .state(NOT_YET)
                 .build();
 
         reservationRepository.save(reservation);
