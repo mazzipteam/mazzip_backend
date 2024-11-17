@@ -1,9 +1,13 @@
 package com.project.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.entity.Bookmark;
+import com.project.entity.Token;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -43,5 +47,16 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Column(nullable = false)
-    private Role role = Role.USER;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "token_id")
+    private Token token;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookmark_id")
+    private List<Bookmark> bookmarks;
 }

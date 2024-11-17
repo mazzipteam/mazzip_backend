@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.entity.clothes.Clothes;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +24,7 @@ public class MyClothes {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;

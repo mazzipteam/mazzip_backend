@@ -14,6 +14,6 @@ public class UserCreateDTO {
     private String telNum;
     private String address;
     private String detailAddress;
-    private String role = "USER";
+    private String role;
 }
 

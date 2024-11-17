@@ -8,6 +8,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 import static com.project.exception.error_code.AvatarErrorCode.AVATAR_NOT_FOUND;
 
 @Service
@@ -52,6 +54,22 @@ public class AvatarService {
         var avatar = avatarRepository.findByAvatarId(avatarId)
                 .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND));
 
+        return avatar;
+    }
+
+    public Avatar expUp(Long avatarId, Integer exp) {
+        var avatar = getAvatar(avatarId);
+
+        avatar.setExperience(avatar.getExperience() + exp);
+        avatarRepository.save(avatar);
+        return avatar;
+    }
+
+    public Avatar eat(Long avatarId) {
+        var avatar = getAvatar(avatarId);
+        avatar.setEatCount(avatar.getEatCount() + 1);
+        avatar.setEatDate(LocalDateTime.now());
+        avatarRepository.save(avatar);
         return avatar;
     }
 }

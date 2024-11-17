@@ -27,6 +27,7 @@ public class Reservation {
     private Integer people;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private State state;
 
     @ManyToOne(fetch = FetchType.LAZY)

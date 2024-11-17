@@ -1,10 +1,13 @@
 package com.project.entity.restraunt;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.entity.Menu;
+import com.project.entity.RestaurantImage;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import static com.project.entity.restraunt.Region.성북구;
+import java.util.List;
 
 @Data
 @Builder
@@ -35,9 +38,11 @@ public class Restaurant {
     private String propritor;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Region region; // 성북구 맛집이므로, "성북구" 고정
 
     @Column(nullable = false)
@@ -52,4 +57,14 @@ public class Restaurant {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_image_id")
+    private RestaurantImage restaurantImage;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id")
+    private List<Menu> menus;
 }

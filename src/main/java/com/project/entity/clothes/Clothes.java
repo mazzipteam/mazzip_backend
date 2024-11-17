@@ -20,6 +20,7 @@ public class Clothes {
     private String name;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(nullable = false)
