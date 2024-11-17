@@ -11,6 +11,7 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.project.api.report.ReportErrorMessage.*;
@@ -33,6 +34,8 @@ public class ReportService {
                 .category(reportCreateDTO.getCategory())
                 .title(reportCreateDTO.getTitle())
                 .description(reportCreateDTO.getDescription())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
         reportRepository.save(report);
