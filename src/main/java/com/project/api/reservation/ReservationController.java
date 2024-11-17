@@ -46,4 +46,8 @@ public class ReservationController {
         var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservation).build();
         return ResponseEntity.ok(response);
     }
+
+    // TODO: 유저 기준 신고
+
+    // TODO: 식당 기준 신고 수
 }

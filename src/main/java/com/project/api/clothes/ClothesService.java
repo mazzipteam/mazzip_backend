@@ -7,6 +7,7 @@ import com.project.entity.clothes.Clothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import static com.project.exception.error_code.ClothesErrorCode.*;
 
@@ -91,5 +92,11 @@ public class ClothesService {
                 .orElseThrow(()->new ControlledException(CLOTHES_NOT_FOUND));
 
         return clothes;
+    }
+
+    public List<Clothes> getAllClothes() {
+        var allClothes = clothesRepository.findAll();
+
+        return allClothes;
     }
 }

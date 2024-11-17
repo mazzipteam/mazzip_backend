@@ -34,4 +34,12 @@ public class NoticeController {
         var response = CommonResponse.builder().code(200).message("알림 조회 성공").data(notice).build();
         return ResponseEntity.ok(response);
     }
+
+    // 알림 조회
+    @GetMapping("/all/{userId}")
+    public ResponseEntity getAll(@PathVariable Long userId) {
+        var notices = noticeService.getAllNotice(userId);
+        var response = CommonResponse.builder().code(200).message("알림 조회 성공").data(notices).build();
+        return ResponseEntity.ok(response);
+    }
 }

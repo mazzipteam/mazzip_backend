@@ -7,6 +7,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.project.exception.error_code.FoodCategoryErrorCode.FOOD_CATEGORY_NAME_ALREADY_EXISTS;
 import static com.project.exception.error_code.FoodCategoryErrorCode.FOOD_CATEGORY_NOT_FOUND;
 
@@ -57,5 +59,10 @@ public class FoodCategoryService {
                 .orElseThrow(() -> new ControlledException(FOOD_CATEGORY_NOT_FOUND));
 
         return foodCategory;
+    }
+
+    public List<FoodCategory> getAllFoodCategoty() {
+        var foodCategories = foodCategoryRepository.findAll();
+        return foodCategories;
     }
 }

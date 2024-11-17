@@ -6,8 +6,10 @@ import com.project.entity.Notice;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import static com.project.exception.error_code.NoticeErrorCode.NOTICE_NOT_FOUND;
+import static com.project.exception.error_code.NoticeErrorCode.NOTICE_NOT_FOUND_BY_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +44,14 @@ public class NoticeService {
                 .orElseThrow(() -> new ControlledException(NOTICE_NOT_FOUND));
 
         return notice;
+    }
+
+    public List<Notice> getAllNotice(Long userId) {
+        var user = userService.getUser(userId);
+
+        var notices = noticeRepository.findByUser(user)
+                .orElseThrow(()-> new ControlledException(NOTICE_NOT_FOUND_BY_USER));
+
+        return notices;
     }
 }

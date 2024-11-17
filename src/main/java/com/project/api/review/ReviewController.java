@@ -44,4 +44,8 @@ public class ReviewController {
         var response = CommonResponse.builder().code(200).message("리뷰 조회 성공").data(review).build();
         return ResponseEntity.ok(response);
     }
+
+    // TODO: 유저 기준 신고
+
+    // TODO: 식당 기준 신고 수
 }

@@ -34,4 +34,11 @@ public class BookmarkController {
         var response = CommonResponse.builder().code(200).message("북마크 조회 성공").data(bookmark).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all/{userId}")
+    public ResponseEntity getAll(@PathVariable Long userId) {
+        var bookmarks = bookmarkService.getAllBookmark(userId);
+        var response = CommonResponse.builder().code(200).message("북마크 조회 성공").data(bookmarks).build();
+        return ResponseEntity.ok(response);
+    }
 }

@@ -46,4 +46,11 @@ public class ClothesController {
         var response = CommonResponse.builder().code(200).message("의상 조회 성공").data(clothes).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity getAll() {
+        var allClothes = clothesService.getAllClothes();
+        var response = CommonResponse.builder().code(200).message("의상 조회 성공").data(allClothes).build();
+        return ResponseEntity.ok(response);
+    }
 }

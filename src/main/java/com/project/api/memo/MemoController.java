@@ -44,4 +44,11 @@ public class MemoController {
         var response = CommonResponse.builder().code(200).message("메모 조회 성공").data(memo).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all/{userId}")
+    public ResponseEntity getAll(@PathVariable Long userId) {
+        var memos = memoService.getAllMemo(userId);
+        var response = CommonResponse.builder().code(200).message("메모 조회 성공").data(memos).build();
+        return ResponseEntity.ok(response);
+    }
 }

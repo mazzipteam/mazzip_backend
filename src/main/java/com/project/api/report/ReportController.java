@@ -46,4 +46,8 @@ public class ReportController {
         var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(report).build();
         return ResponseEntity.ok(response);
     }
+    
+    // TODO: 유저 기준 신고
+    
+    // TODO: 식당 기준 신고 수
 }

@@ -44,4 +44,11 @@ public class FoodCategoryController {
         var response = CommonResponse.builder().code(200).message("음식 카테고리 조회 성공").data(foodCategory).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity getAll() {
+        var foodCategories = foodCategoryService.getAllFoodCategoty();
+        var response = CommonResponse.builder().code(200).message("음식 카테고리 조회 성공").data(foodCategories).build();
+        return ResponseEntity.ok(response);
+    }
 }

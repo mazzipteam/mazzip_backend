@@ -10,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.project.exception.error_code.MemoErrorCode.MEMO_NOT_FOUND;
+import static com.project.exception.error_code.MemoErrorCode.MEMO_NOT_FOUND_BY_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -64,5 +66,12 @@ public class MemoService {
                 .orElseThrow(() -> new ControlledException(MEMO_NOT_FOUND));
 
         return memo;
+    }
+
+    public List<Memo> getAllMemo(Long userId) {
+        var user = userService.getUser(userId);
+        var memos = memoRepository.findByUser(user)
+                .orElseThrow(() -> new ControlledException(MEMO_NOT_FOUND_BY_USER));
+        return memos;
     }
 }

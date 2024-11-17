@@ -44,4 +44,11 @@ public class MenuController {
         var response = CommonResponse.builder().code(200).message("메뉴 조회 성공").data(menu).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all/{restaurantId}")
+    public ResponseEntity getAll(@PathVariable Long restaurantId) {
+        var menus = menuService.getAllMenu(restaurantId);
+        var response = CommonResponse.builder().code(200).message("메뉴 조회 성공").data(menus).build();
+        return ResponseEntity.ok(response);
+    }
 }

@@ -9,6 +9,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.project.exception.error_code.MenuErrorCode.*;
 
 @Service
@@ -116,5 +118,12 @@ public class MenuService {
                 .orElseThrow(() -> new ControlledException(MENU_NOT_FOUND));
 
         return menu;
+    }
+
+    public List<Menu> getAllMenu(Long restaurantId) {
+        var restaurant = restaurantService.getRestaurant(restaurantId);
+        var menus = menuRepository.findByRestaurant(restaurant)
+                .orElseThrow(() -> new ControlledException(MENU_NOT_FOUND));
+        return menus;
     }
 }

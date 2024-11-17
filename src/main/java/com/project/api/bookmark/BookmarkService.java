@@ -6,8 +6,10 @@ import com.project.entity.Bookmark;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import static com.project.exception.error_code.BookmarkErrorCode.BOOKMARK_NOT_FOUND;
+import static com.project.exception.error_code.BookmarkErrorCode.BOOKMARK_NOT_FOUND_BY_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +43,13 @@ public class BookmarkService {
                 .orElseThrow(()->new ControlledException(BOOKMARK_NOT_FOUND));
 
         return bookmark;
+    }
+
+    public List<Bookmark> getAllBookmark(Long userId) {
+        var user = userService.getUser(userId);
+        var bookmarks = bookmarkRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(BOOKMARK_NOT_FOUND_BY_USER));
+
+        return bookmarks;
     }
 }
