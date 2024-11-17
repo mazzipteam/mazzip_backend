@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import static com.project.api.report.ReportErrorMessage.REPORT_NOT_FOUND_BY_RESTAURANT;
+import static com.project.api.report.ReportErrorMessage.REPORT_NOT_FOUND_BY_USER;
 import static com.project.exception.error_code.ReviewErrorCode.IMAGE_OF_INCORRECT_FORMAT;
 import static com.project.exception.error_code.ReviewErrorCode.REVIEW_NOT_FOUND;
 
@@ -77,5 +80,21 @@ public class ReviewService {
                 .orElseThrow(()->new ControlledException(REVIEW_NOT_FOUND));
 
         return review;
+    }
+
+    public List<Review> getAllReportByUser(Long userId) {
+        var user = userService.getUser(userId);
+        var reviews = reviewRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_USER));
+
+        return reviews;
+    }
+
+    public List<Review> getAllReportByRestaurant(Long restaurantId) {
+        var restaurant = restaurantService.getRestaurant(restaurantId);
+        var reviews = reviewRepository.findByRestaurant(restaurant)
+                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_RESTAURANT));
+
+        return reviews;
     }
 }

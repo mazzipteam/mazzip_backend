@@ -47,7 +47,17 @@ public class ReservationController {
         return ResponseEntity.ok(response);
     }
 
-    // TODO: 유저 기준 신고
+    @GetMapping("/all/user/{userId}")
+    public ResponseEntity getAllByUser(@PathVariable Long userId) {
+        var reservations = reservationService.getAllReservationByUser(userId);
+        var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservations).build();
+        return ResponseEntity.ok(response);
+    }
 
-    // TODO: 식당 기준 신고 수
+    @GetMapping("/all/user/{restaurantId}")
+    public ResponseEntity getAllByRestaurant(@PathVariable Long restaurantId) {
+        var reservations = reservationService.getAllReservationByRestaurant(restaurantId);
+        var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservations).build();
+        return ResponseEntity.ok(response);
+    }
 }

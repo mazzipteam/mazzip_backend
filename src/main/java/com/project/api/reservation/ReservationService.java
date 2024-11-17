@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import static com.project.entity.reservation.State.NOT_YET;
 import static com.project.exception.error_code.ReservationErrorCode.*;
@@ -97,5 +98,21 @@ public class ReservationService {
                 .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND));
 
         return reservation;
+    }
+
+    public List<Reservation> getAllReservationByUser(Long userId) {
+        var user = userService.getUser(userId);
+        var reservations = reservationRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND_BY_USER));
+
+        return reservations;
+    }
+
+    public List<Reservation> getAllReservationByRestaurant(Long restaurantId) {
+        var restaurant = restaurantService.getRestaurant(restaurantId);
+        var reservations = reservationRepository.findByRestaurant(restaurant)
+                .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND_BY_RESTAURANT));
+
+        return reservations;
     }
 }

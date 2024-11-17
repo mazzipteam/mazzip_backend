@@ -46,8 +46,18 @@ public class ReportController {
         var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(report).build();
         return ResponseEntity.ok(response);
     }
-    
-    // TODO: 유저 기준 신고
-    
-    // TODO: 식당 기준 신고 수
+
+    @GetMapping("/all/user/{userId}")
+    public ResponseEntity getAllByUser(@PathVariable Long userId) {
+        var reports = reportService.getAllReportByUser(userId);
+        var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all/user/{restaurantId}")
+    public ResponseEntity getAllByRestaurant(@PathVariable Long restaurantId) {
+        var reports = reportService.getAllReportByRestaurant(restaurantId);
+        var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
+        return ResponseEntity.ok(response);
+    }
 }

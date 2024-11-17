@@ -4,14 +4,16 @@ import com.project.api.report.dto.ReportCreateDTO;
 import com.project.api.report.dto.ReportUpdateDTO;
 import com.project.api.report.report.Category;
 import com.project.api.report.report.Report;
+import com.project.api.restaurant.RestaurantService;
 import com.project.api.review.ReviewService;
 import com.project.api.user.UserService;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.api.report.ReportErrorMessage.CATEGORY_OF_INCORRECT_FORMAT;
-import static com.project.api.report.ReportErrorMessage.REPORT_NOT_FOUND;
+import java.util.List;
+
+import static com.project.api.report.ReportErrorMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,7 @@ public class ReportService {
     private final ReviewService reviewService;
     private final UserService userService;
     private final ReportRepository reportRepository;
+    private final RestaurantService restaurantService;
 
     public Report create(ReportCreateDTO reportCreateDTO) {
         var review = reviewService.getReview(reportCreateDTO.getReviewId());
@@ -73,5 +76,21 @@ public class ReportService {
                 .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND));
 
         return report;
+    }
+
+    public List<Report> getAllReportByUser(Long userId) {
+        var user = userService.getUser(userId);
+        var reports = reportRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_USER));
+
+        return reports;
+    }
+
+    public List<Report> getAllReportByRestaurant(Long restaurantId) {
+        var restaurant = restaurantService.getRestaurant(restaurantId);
+        var reports = reportRepository.findByRestaurant(restaurant)
+                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_RESTAURANT));
+
+        return reports;
     }
 }
