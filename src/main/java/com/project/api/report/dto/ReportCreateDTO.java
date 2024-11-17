@@ -1,6 +1,6 @@
 package com.project.api.report.dto;
 
-import com.project.api.report.report.Category;
+import com.project.entity.report.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

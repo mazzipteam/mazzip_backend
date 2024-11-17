@@ -17,6 +17,7 @@ import lombok.*;
 public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookmark_id")
     private Long bookmarkId;
 
     @JsonBackReference

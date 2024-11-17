@@ -53,11 +53,4 @@ public class ReportController {
         var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
         return ResponseEntity.ok(response);
     }
-
-    @GetMapping("/all/user/{restaurantId}")
-    public ResponseEntity getAllByRestaurant(@PathVariable Long restaurantId) {
-        var reports = reportService.getAllReportByRestaurant(restaurantId);
-        var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
-        return ResponseEntity.ok(response);
-    }
 }

@@ -1,6 +1,6 @@
 package com.project.api.report;
 
-import com.project.api.report.report.Report;
+import com.project.entity.report.Report;
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +16,4 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     void deleteByReportId(Long reportId);
 
     Optional<List<Report>> findByUser(User user);
-
-    Optional<List<Report>> findByRestaurant(Restaurant restaurant);
 }

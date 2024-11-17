@@ -45,7 +45,7 @@ public class AvatarController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/expUp/{avatarId}/{exp}}")
+    @PatchMapping("/expUp/{avatarId}/{exp}")
     public ResponseEntity expUp(@PathVariable Long avatarId, @PathVariable Integer exp) {
         var avatar = avatarService.expUp(avatarId, exp);
         var response = CommonResponse.builder().code(200).message("아바타 경험치 획득 성공").data(avatar).build();

@@ -1,4 +1,4 @@
-package com.project.api.report.report;
+package com.project.entity.report;
 
 import com.project.entity.Review;
 import com.project.entity.user.User;

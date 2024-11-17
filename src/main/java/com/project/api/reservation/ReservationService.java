@@ -40,7 +40,7 @@ public class ReservationService {
         var reservation = Reservation.builder()
                 .time(reservationCreateDTO.getTime())
                 .people(reservationCreateDTO.getPeople())
-                .customer(user)
+                .user(user)
                 .restaurant(restaurant)
                 .state(NOT_YET)
                 .build();

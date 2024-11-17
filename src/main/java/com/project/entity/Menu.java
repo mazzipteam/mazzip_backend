@@ -16,6 +16,7 @@ import lombok.*;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookmark_id")
     private Long menuId;
 
     @JsonBackReference

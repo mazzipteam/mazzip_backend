@@ -2,8 +2,8 @@ package com.project.api.report;
 
 import com.project.api.report.dto.ReportCreateDTO;
 import com.project.api.report.dto.ReportUpdateDTO;
-import com.project.api.report.report.Category;
-import com.project.api.report.report.Report;
+import com.project.entity.report.Category;
+import com.project.entity.report.Report;
 import com.project.api.restaurant.RestaurantService;
 import com.project.api.review.ReviewService;
 import com.project.api.user.UserService;
@@ -85,14 +85,6 @@ public class ReportService {
         var user = userService.getUser(userId);
         var reports = reportRepository.findByUser(user)
                 .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_USER));
-
-        return reports;
-    }
-
-    public List<Report> getAllReportByRestaurant(Long restaurantId) {
-        var restaurant = restaurantService.getRestaurant(restaurantId);
-        var reports = reportRepository.findByRestaurant(restaurant)
-                .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_RESTAURANT));
 
         return reports;
     }
