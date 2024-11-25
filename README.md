@@ -185,3 +185,41 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root1234' WITH GRANT OP
 __※중요※__
 ec2 프리티어 t2.micro는 도커 실행 시 __인스턴스 과부하로__ 작동이 멈추기 때문에, 멈췄다면 __인스턴스 중지__ 후 __다시 시작__ 해야 한다.
 
+# AWS 적용 방법
+
+### 1. Git Pull로 코드 업데이트
+```sh
+cd ~/mazzip_backend/
+git pull origin
+```
+
+### 2. Docker Compose 중지 및 컨테이너 제거
+```sh
+docker-compose down
+```
+
+### 3. Docker 시스템 정리 (불필요한 데이터 제거)
+```sh
+docker system prune -a -f
+```
+
+### 4. 프로젝트 빌드
+```sh
+./gradlew build
+```
+
+### 5. Docker Compose 실행 + 이미지 생성
+```sh
+docker-compose up -d --build
+```
+
+### 9. 배포 상태 확인
+```sh
+#로그 확인
+docker-compose logs -f
+
+#컨테이너 목록 확인
+docker container ls -al
+```
+
+
