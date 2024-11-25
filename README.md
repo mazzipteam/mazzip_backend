@@ -122,8 +122,18 @@ rm amazon-corretto-21-x64-linux-jdk.tar.gz
 [자바 환경변수 설정](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_$JAVA_HOME_%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98_%EC%84%A4%EC%A0%95#google_vignette)
 1. 압축 해제된 파일 위치에 환경변수 설정
 ```bash
+# 1. 환경 변수 임시 적용방법
 # JAVA_HOME 환경변수를 설치한 `JAVA21` 디렉토리로 설정
 export JAVA_HOME=/home/ec2-user/JAVA21
+
+# 2. 환경 변수 영구 적용방법
+sudo vi /etc/environment
+# 파일에 해당 텍스트 추가 
+JAVA_HOME="/home/ec2-user/JAVA21"
+PATH="$JAVA_HOME/bin:$PATH"
+
+# 변경사항 적용
+source /etc/environment
 
 # JDK 및 환경변수 설정 확인
 $JAVA_HOME/bin/javac -version
