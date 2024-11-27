@@ -54,17 +54,15 @@ public class Restaurant {
     @Column(nullable = false)
     private Character takeOut;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
     @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_image_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private RestaurantImage restaurantImage;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Menu> menus;
 }

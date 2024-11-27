@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -43,7 +44,6 @@ public class Avatar {
     private User user;
 
     @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "my_clothes_id")
-    private MyClothes myClothes;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "avatar", cascade = CascadeType.ALL)
+    private List<MyClothes> myClothes;
 }

@@ -25,7 +25,7 @@ public class MyClothes {
     private Avatar avatar;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 

@@ -20,7 +20,7 @@ public class Menu {
     private Long menuId;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
