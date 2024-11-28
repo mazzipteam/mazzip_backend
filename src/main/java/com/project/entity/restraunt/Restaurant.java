@@ -1,5 +1,6 @@
 package com.project.entity.restraunt;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.Menu;
 import com.project.entity.RestaurantImage;
@@ -51,6 +52,7 @@ public class Restaurant {
     @Column(nullable = false)
     private Character takeOut;
 
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;

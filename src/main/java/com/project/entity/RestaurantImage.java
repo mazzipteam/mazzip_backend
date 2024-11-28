@@ -23,9 +23,12 @@ public class RestaurantImage {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @Lob
     private byte[] foreGround;
 
+    @Lob
     private byte[] interior;
 
+    @Lob
     private byte[] menu;
 }

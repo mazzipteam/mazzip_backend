@@ -23,6 +23,7 @@ public class Clothes {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Lob
     @Column(nullable = false)
     private byte[] image;
 

@@ -1,5 +1,6 @@
 package com.project.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.Bookmark;
 import com.project.entity.Token;
@@ -50,11 +51,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Token token;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarks;
 }

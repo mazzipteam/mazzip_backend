@@ -35,6 +35,7 @@ public class Review {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @Lob
     private byte[] image;
 
     @Column(nullable = false)

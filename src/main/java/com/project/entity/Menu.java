@@ -40,6 +40,7 @@ public class Menu {
     @Column(nullable = false)
     private char cheap;
 
+    @Lob
     @Column(nullable = false)
     private byte[] image;
 
