@@ -4,7 +4,9 @@ import com.project.api.restaurant.dto.RestaurantCreateDTO;
 import com.project.api.restaurant.dto.RestaurantUpdateDTO;
 import com.project.api.restaurant_image.RestaurantImageService;
 import com.project.common.CommonResponse;
+import com.project.common.OctetStreamReadMsgConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,23 +19,22 @@ public class RestaurantController {
     private final RestaurantImageService restaurantImageService;
 
     // TODO: Category 반환하는 API도 있어야 할듯
-
-    // 맛집 생성
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity create(
             @RequestPart RestaurantCreateDTO restaurantCreateDTO,
-            @RequestPart(value = "multipartFile", required = false) MultipartFile multipartFileForeground,
-            @RequestPart(value = "multipartFile", required = false) MultipartFile multipartFileInterior,
-            @RequestPart(value = "multipartFile", required = false) MultipartFile multipartFileMenu) {
+            @RequestPart(value = "multipartFileForeground", required = false) MultipartFile multipartFileForeground,
+            @RequestPart(value = "multipartFileInterior", required = false) MultipartFile multipartFileInterior,
+            @RequestPart(value = "multipartFileMenu", required = false) MultipartFile multipartFileMenu) {
+
         var restaurant = restaurantService.create(restaurantCreateDTO);
-        
+
         // 식당 이미지 추가
         restaurantImageService.create(restaurant, multipartFileForeground, multipartFileInterior, multipartFileMenu);
 
         var response = CommonResponse.builder().code(200).message("맛집 생성 성공").data(restaurant).build();
         return ResponseEntity.ok(response);
     }
-    
+
     // 맛집 수정
     @PatchMapping
     public ResponseEntity update(@RequestBody RestaurantUpdateDTO restaurantUpdateDTO) {

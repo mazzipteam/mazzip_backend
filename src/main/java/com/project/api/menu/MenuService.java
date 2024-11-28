@@ -8,6 +8,7 @@ import com.project.entity.Menu;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class MenuService {
     private final RestaurantService restaurantService;
     private final FoodCategoryService foodCategoryService;
 
-    public Menu create(MenuCreateDTO menuCreateDTO) {
+    public Menu create(MenuCreateDTO menuCreateDTO, MultipartFile multipartFile) {
         var restaurant = restaurantService.getRestaurant(menuCreateDTO.getRestaurantId());
         var foodCategory = foodCategoryService.getFoodCategory(menuCreateDTO.getFoodCategoryId());
 
@@ -28,20 +29,24 @@ public class MenuService {
         if(restaurantService.getRestaurant(menuCreateDTO.getRestaurantId()) != null)
             throw new ControlledException(RESTAURANT_ALREADY_EXISTS);
 
-        var menu = Menu.builder()
-                .name(menuCreateDTO.getName())
-                .price(menuCreateDTO.getPrice())
-                .description(menuCreateDTO.getDescription())
-                .cheap(menuCreateDTO.getCheap())
-                .image(menuCreateDTO.getImage())
-                .main(menuCreateDTO.getMain())
-                .isReserve(menuCreateDTO.getIsReserve())
-                .restaurant(restaurant)
-                .foodCategory(foodCategory)
-                .build();
+        try {
+            var menu = Menu.builder()
+                    .name(menuCreateDTO.getName())
+                    .price(menuCreateDTO.getPrice())
+                    .description(menuCreateDTO.getDescription())
+                    .cheap(menuCreateDTO.getCheap())
+                    .image(multipartFile.getBytes())
+                    .main(menuCreateDTO.getMain())
+                    .isReserve(menuCreateDTO.getIsReserve())
+                    .restaurant(restaurant)
+                    .foodCategory(foodCategory)
+                    .build();
 
-        menuRepository.save(menu);
-        return menu;
+            menuRepository.save(menu);
+            return menu;
+        } catch (Exception e) {
+            throw new ControlledException(MENU_NOT_FOUND);
+        }
     }
 
     public Menu update(MenuUpdateDTO menuUpdateDTO) {

@@ -4,8 +4,10 @@ import com.project.api.menu.dto.MenuCreateDTO;
 import com.project.api.menu.dto.MenuUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/menu")
@@ -14,9 +16,12 @@ public class MenuController {
     private final MenuService menuService;
 
     // 메뉴 생성
-    @PostMapping
-    public ResponseEntity create(@RequestBody MenuCreateDTO menuCreateDTO) {
-        var menu = menuService.create(menuCreateDTO);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity create(
+            @RequestPart MenuCreateDTO menuCreateDTO,
+            @RequestPart(value = "multipartFile", required = false) MultipartFile multipartFile
+    ) {
+        var menu = menuService.create(menuCreateDTO, multipartFile);
         var response = CommonResponse.builder().code(200).message("메뉴 생성 성공").data(menu).build();
         return ResponseEntity.ok(response);
     }

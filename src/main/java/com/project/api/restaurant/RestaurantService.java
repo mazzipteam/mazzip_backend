@@ -47,9 +47,7 @@ public class RestaurantService {
                 .businessName(restaurantCreateDTO.getBusinessName())
                 .propritor(restaurantCreateDTO.getPropritor())
                 .category(category)
-                //.region(restaurantCreateDTO.getRegion())
                 .region(성북구)
-                .latLng(restaurantCreateDTO.getLatLng()) // TODO: 위치 좌표 주입할 것
                 .telNum(restaurantCreateDTO.getTelNum())
                 .takeOut(restaurantCreateDTO.getTakeOut())
                 .rating(0.0)
@@ -97,9 +95,6 @@ public class RestaurantService {
             restaurant.setName(restaurantUpdateDTO.getPropritor());
 
         restaurant.setCategory(category);
-
-        if(restaurantUpdateDTO.getLatLng()!= null)
-            restaurant.setName(restaurantUpdateDTO.getLatLng());
 
         if(restaurantUpdateDTO.getTelNum()!= null)
             restaurant.setName(restaurantUpdateDTO.getTelNum());

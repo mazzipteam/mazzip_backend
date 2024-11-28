@@ -14,7 +14,6 @@ public class RestaurantUpdateDTO {
     private String businessName;
     private String propritor;
     private String category;
-    private String latLng; // 위경도에 대한 JSON 값 저장 // 주소와 일치해야함
     private String telNum;
     private String takeOut;
     private String userId; // Long으로 타입 변환 필요(null로 반환 가능하게 하기 위함)
