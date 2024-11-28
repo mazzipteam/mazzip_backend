@@ -1,12 +1,12 @@
 package com.project.api.restaurant_image;
 
-import com.project.api.restaurant.RestaurantService;
-import com.project.api.restaurant_image.dto.RestaurantImageCreateDTO;
 import com.project.api.restaurant_image.dto.RestaurantImageUpdateDTO;
 import com.project.entity.RestaurantImage;
+import com.project.entity.restraunt.Restaurant;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import static com.project.exception.error_code.RestaurantImageErrorMessage.RESTAURANT_IMAGE_ALREADY_EXISTS;
 import static com.project.exception.error_code.RestaurantImageErrorMessage.RESTAURANT_IMAGE_NOT_FOUND;
@@ -16,24 +16,24 @@ import static com.project.exception.error_code.ClothesErrorCode.IMAGE_OF_INCORRE
 @RequiredArgsConstructor
 public class RestaurantImageService {
     private final RestaurantImageRepository restaurantImageRepository;
-    private final RestaurantService restaurantService;
 
-    public RestaurantImage create(RestaurantImageCreateDTO restaurantImageCreateDTO) {
-        var restaurant = restaurantService.getRestaurant(restaurantImageCreateDTO.getRestaurantId());
-
-        // 1. [예외처리] 이미 식당에 이미지가 존재하는 경우
+    public RestaurantImage create(Restaurant restaurant, MultipartFile multipartFileForeground, MultipartFile multipartFileInterior, MultipartFile multipartFileMenu) {
         if(restaurantImageRepository.findByRestaurant(restaurant).isPresent())
             throw new ControlledException(RESTAURANT_IMAGE_ALREADY_EXISTS);
 
-        var restaurantImage = RestaurantImage.builder()
-                .restaurant(restaurant)
-                .foreGround(restaurantImageCreateDTO.getForeGround())
-                .interior(restaurantImageCreateDTO.getInterior())
-                .menu(restaurantImageCreateDTO.getMenu())
-                .build();
+        try {
+            var restaurantImage = RestaurantImage.builder()
+                    .restaurant(restaurant)
+                    .foreGround(multipartFileForeground.getBytes())
+                    .interior(multipartFileInterior.getBytes())
+                    .menu(multipartFileMenu.getBytes())
+                    .build();
 
-        restaurantImageRepository.save(restaurantImage);
-        return restaurantImage;
+            restaurantImageRepository.save(restaurantImage);
+            return restaurantImage;
+        } catch (Exception ex) {
+            throw new ControlledException(IMAGE_OF_INCORRECT_FORMAT);
+        }
     }
 
     public RestaurantImage update(RestaurantImageUpdateDTO restaurantImageUpdateDTO) {
