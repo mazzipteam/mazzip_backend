@@ -58,4 +58,12 @@ public class ReviewController {
         var response = CommonResponse.builder().code(200).message("리뷰 조회 성공").data(reviews).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/add/user/{restaurantId}")
+    public ResponseEntity getRatingByRestaurant(@PathVariable Long restaurantId) {
+        var reviews = reviewService.getAllReportByRestaurant(restaurantId);
+        var ratings = reviewService.getRatings(reviews);
+        var response = CommonResponse.builder().code(200).message("평점 조회 성공").data(ratings).build();
+        return ResponseEntity.ok(response);
+    }
 }

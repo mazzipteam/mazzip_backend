@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.project.api.report.ReportErrorMessage.REPORT_NOT_FOUND_BY_RESTAURANT;
@@ -96,5 +97,15 @@ public class ReviewService {
                 .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_RESTAURANT));
 
         return reviews;
+    }
+
+    public List<Double> getRatings(List<Review> reviews) {
+        List<Double> counters = new ArrayList<>(0);
+        for (Review review : reviews) {
+            counters.set(review.getRating().intValue(), counters.get(review.getRating().intValue())+1);
+            counters.set(0, counters.getFirst()+review.getRating());
+        }
+
+        return counters;
     }
 }
