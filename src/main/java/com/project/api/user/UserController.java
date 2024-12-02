@@ -44,4 +44,11 @@ public class UserController {
         var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user).build();
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
+        var user = userService.login(loginDTO);
+        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user).build();
+        return ResponseEntity.ok(response);
+    }
 }

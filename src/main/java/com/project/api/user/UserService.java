@@ -119,4 +119,14 @@ public class UserService {
         }
         return EMAIL_PATTERN.matcher(email).matches();
     }
+
+    public User login(LoginDTO loginDTO) {
+        var user = userRepository.findByEmail(loginDTO.getEmail())
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_EMAIL));
+
+        if(!user.getPassword().equals(loginDTO.getPassword()))
+            throw new ControlledException(USER_NOT_FOUND_BY_PASSWORD);
+
+        return user;
+    }
 }
