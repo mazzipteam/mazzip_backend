@@ -129,4 +129,23 @@ public class UserService {
 
         return user;
     }
+
+    public User findEmail(String nickName, Long telNum) {
+        var user = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_NICK_NAME));
+
+        if(user.getTelNum().equals(telNum)) throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
+
+        return user;
+    }
+
+    public User findPassword(String nickName, Long telNum, String email) {
+        var user = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_NICK_NAME));
+
+        if(user.getTelNum().equals(telNum)) throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
+        if(user.getEmail().equals(email)) throw new ControlledException(EMAIL_ALREADY_EXISTS);
+
+        return user;
+    }
 }
