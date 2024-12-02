@@ -9,6 +9,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.project.entity.restraunt.Region.성북구;
 import static com.project.exception.error_code.RestaurantErrorCode.*;
 import static com.project.exception.error_code.UserErrorCode.TELNUM_OF_INCORRECT_FORMAT;
@@ -124,5 +126,11 @@ public class RestaurantService {
                 .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
 
         return restaurant;
+    }
+
+    public List<Restaurant> getRestaurantAll() {
+        var restaurants = restaurantRepository.findAll();
+
+        return restaurants;
     }
 }
