@@ -51,4 +51,12 @@ public class MyClothesController {
         var response = CommonResponse.builder().code(200).message("내 의상 조회 성공").data(allMyClothes).build();
         return ResponseEntity.ok(response);
     }
+
+    @PatchMapping("/wear/{myClothesId}")
+    public ResponseEntity wear(@PathVariable Long myClothesId) {
+        var wantClothes = myClothesService.getMyClothes(myClothesId);
+        var myClothes = myClothesService.wear(wantClothes);
+        var response = CommonResponse.builder().code(200).message("내 의상 착용 성공").data(myClothes).build();
+        return ResponseEntity.ok(response);
+    }
 }
