@@ -105,7 +105,7 @@ public class RestaurantService {
             restaurant.setName(restaurantUpdateDTO.getTakeOut());
 
         if(restaurantUpdateDTO.getUserId()!= null){
-            var userId = Long.getLong(restaurantUpdateDTO.getUserId());
+            var userId = Long.parseLong(restaurantUpdateDTO.getUserId());
             var user = userService.getUser(userId);
             restaurant.setUser(user);
         }

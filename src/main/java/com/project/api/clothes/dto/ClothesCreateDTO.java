@@ -10,6 +10,5 @@ import lombok.Setter;
 public class ClothesCreateDTO {
     private String name;
     private String category;
-    private byte[] image;
     private Integer cost;
 }

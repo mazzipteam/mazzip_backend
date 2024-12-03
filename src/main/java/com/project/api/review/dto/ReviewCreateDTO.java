@@ -11,7 +11,6 @@ public class ReviewCreateDTO {
     private Double rating;
     private String title;
     private String description;
-    private byte[] image;
     private Long userId;
     private Long restaurantId;
 }
