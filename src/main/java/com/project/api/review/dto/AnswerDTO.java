@@ -1,4 +1,4 @@
-package com.project.api.review;
+package com.project.api.review.dto;
 
 import lombok.Builder;
 import lombok.Getter;
