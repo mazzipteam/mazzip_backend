@@ -1,6 +1,8 @@
 package com.project.api.notice.message;
 
 import com.project.api.bookmark.BookmarkService;
+import com.project.api.notice.NoticeCreateDTO;
+import com.project.api.notice.NoticeService;
 import com.project.api.notice.message.auth.PpurioAuth;
 import com.project.api.notice.message.send.PpurioSendResponse;
 import com.project.api.notice.message.send.messagetype.SMS;
@@ -21,6 +23,7 @@ public class PpurioSendService {
     private final RestTemplate restTemplate;
     private final RestaurantService restaurantService;
     private final BookmarkService bookmarkService;
+    private final NoticeService noticeService;
     // 뿌리오 계정
     @Value("${spring.ppurio.account}")
     private String ppurioAccount;
@@ -51,6 +54,12 @@ public class PpurioSendService {
 
         // 전송
         var ppurioSendResponse = restTemplate.postForObject(url+"/v1/message", request, PpurioSendResponse.class);
+
+        var noticeCreateDTO = NoticeCreateDTO.builder()
+                .bookmarks(bookmarks)
+                .message(ppurioMessageDTO.getContent())
+                .build();
+        noticeService.create(noticeCreateDTO);
 
         // 메세지 저장
         return ppurioSendResponse;
