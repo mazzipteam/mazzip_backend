@@ -1,6 +1,5 @@
 package com.project.api.food_category;
 
-import com.project.api.food_category.dto.FoodCategoryCreateDTO;
 import com.project.api.food_category.dto.FoodCategoryUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +13,9 @@ public class FoodCategoryController {
     private final FoodCategoryService foodCategoryService;
 
     // 음식 카테고리 생성
-    @PostMapping
-    public ResponseEntity create(@RequestBody FoodCategoryCreateDTO foodCategoryCreateDTO) {
-        var foodCategory = foodCategoryService.create(foodCategoryCreateDTO);
+    @PostMapping("/{name}")
+    public ResponseEntity create(@PathVariable String name) {
+        var foodCategory = foodCategoryService.create(name);
         var response = CommonResponse.builder().code(200).message("음식 카테고리 생성 성공").data(foodCategory).build();
         return ResponseEntity.ok(response);
     }

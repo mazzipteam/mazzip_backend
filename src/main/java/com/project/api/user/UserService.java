@@ -39,7 +39,6 @@ public class UserService {
         Role role;
         try {
             role = Role.valueOf(userCreateDTO.getRole());
-            role = Role.USER; // TODO: 임시로 계정은 무조건 USER로 생성되게 설정
         } catch (IllegalArgumentException e) {
             throw new ControlledException(ROLE_OF_INCORRECT_FORMAT);
         }

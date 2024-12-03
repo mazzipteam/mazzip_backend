@@ -1,6 +1,5 @@
 package com.project.api.food_category;
 
-import com.project.api.food_category.dto.FoodCategoryCreateDTO;
 import com.project.api.food_category.dto.FoodCategoryUpdateDTO;
 import com.project.entity.FoodCategory;
 import com.project.exception.ControlledException;
@@ -17,13 +16,13 @@ import static com.project.exception.error_code.FoodCategoryErrorCode.FOOD_CATEGO
 public class FoodCategoryService {
     private final FoodCategoryRepository foodCategoryRepository;
 
-    public FoodCategory create(FoodCategoryCreateDTO foodCategoryCreateDTO) {
+    public FoodCategory create(String name) {
         // 1. [예외처리] 이미 존재하는 음식 카테고리명
-        if(foodCategoryRepository.findByName(foodCategoryCreateDTO.getName()).isPresent())
+        if(foodCategoryRepository.findByName(name).isPresent())
             throw new ControlledException(FOOD_CATEGORY_NAME_ALREADY_EXISTS);
 
         var foodCategory = FoodCategory.builder()
-                .name(foodCategoryCreateDTO.getName())
+                .name(name)
                 .schToday(0)
                 .schWeek(0)
                 .schMonth(0)
