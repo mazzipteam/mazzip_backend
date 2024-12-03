@@ -58,7 +58,7 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all/user/{restaurantId}")
+    @GetMapping("/all/restaurant/{restaurantId}")
     public ResponseEntity getAllByRestaurant(@PathVariable Long restaurantId) {
         var reviews = reviewService.getAllReportByRestaurant(restaurantId);
         var response = CommonResponse.builder().code(200).message("리뷰 조회 성공").data(reviews).build();
