@@ -133,4 +133,12 @@ public class RestaurantService {
 
         return restaurants;
     }
+
+    public Restaurant getRestaurantByUser(Long userId) {
+        var user = userService.getUser(userId);
+        var restaurant = restaurantRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(RESTAURANT_NOT_FOUND_BY_USER));
+
+        return restaurant;
+    }
 }
