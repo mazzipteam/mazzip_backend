@@ -15,7 +15,6 @@ import static com.project.exception.error_code.NoticeErrorCode.NOTICE_NOT_FOUND_
 @RequiredArgsConstructor
 public class NoticeService {
     private final UserService userService;
-    private final BookmarkService bookmarkService;
     private final NoticeRepository noticeRepository;
 
     public Notice create(NoticeCreateDTO noticeCreateDTO) {
