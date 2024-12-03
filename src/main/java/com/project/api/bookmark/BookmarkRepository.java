@@ -1,6 +1,7 @@
 package com.project.api.bookmark;
 
 import com.project.entity.Bookmark;
+import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     void deleteByBookmarkId(Long bookmarkId);
 
     Optional<List<Bookmark>> findByUser(User user);
+
+    Optional<List<Bookmark>> findByRestaurant(Restaurant restaurant);
 }
