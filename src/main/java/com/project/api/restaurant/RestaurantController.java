@@ -58,6 +58,13 @@ public class RestaurantController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{userId}")
+    public ResponseEntity getByUser(@RequestParam Long userId) {
+        var restaurant = restaurantService.getRestaurantByUser(userId);
+        var response = CommonResponse.builder().code(200).message("점주 레스토랑 조회 성공").data(restaurant).build();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping
     public ResponseEntity getAll() {
         var restaurants = restaurantService.getRestaurantAll();
