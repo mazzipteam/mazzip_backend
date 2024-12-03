@@ -1,6 +1,5 @@
 package com.project.api.notice;
 
-import com.project.api.bookmark.BookmarkService;
 import com.project.api.user.UserService;
 import com.project.entity.Notice;
 import com.project.exception.ControlledException;

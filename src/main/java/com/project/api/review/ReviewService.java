@@ -108,4 +108,12 @@ public class ReviewService {
 
         return counters;
     }
+
+    public Review answer(AnswerDTO answerDTO) {
+        var review = getReview(answerDTO.getReviewId());
+        review.setAnswer(answerDTO.answer);
+
+        reviewRepository.save(review);
+        return review;
+    }
 }

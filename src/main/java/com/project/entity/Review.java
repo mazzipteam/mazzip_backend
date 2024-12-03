@@ -38,6 +38,9 @@ public class Review {
     @Lob
     private byte[] image;
 
+    @Builder.Default
+    private String answer = "";
+
     @Column(nullable = false)
     private Integer recommend;
 

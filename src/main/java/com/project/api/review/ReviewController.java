@@ -66,4 +66,11 @@ public class ReviewController {
         var response = CommonResponse.builder().code(200).message("평점 조회 성공").data(ratings).build();
         return ResponseEntity.ok(response);
     }
+
+    @PatchMapping("/answer")
+    public ResponseEntity answer(@RequestBody AnswerDTO answerDTO) {
+        var reviews = reviewService.answer(answerDTO);
+        var response = CommonResponse.builder().code(200).message("답변 작성 완료").data(reviews).build();
+        return ResponseEntity.ok(response);
+    }
 }
