@@ -118,7 +118,7 @@ public class ReviewService {
 
     public Review answer(AnswerDTO answerDTO) {
         var review = getReview(answerDTO.getReviewId());
-        review.setAnswer(answerDTO.answer);
+        review.setAnswer(answerDTO.getAnswer());
 
         reviewRepository.save(review);
         return review;
