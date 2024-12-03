@@ -19,12 +19,9 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     public Notice create(NoticeCreateDTO noticeCreateDTO) {
-        var user = userService.getUser(noticeCreateDTO.getUserId());
-        var bookmark = bookmarkService.getBookmark(noticeCreateDTO.getBookmarkId());
 
         var notice = Notice.builder()
-                .user(user)
-                .bookmark(bookmark)
+                .bookmarks(noticeCreateDTO.getBookmarks())
                 .message(noticeCreateDTO.getMessage())
                 .build();
 

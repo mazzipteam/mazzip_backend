@@ -23,6 +23,13 @@ spring:
         show_sql: true
       dialect: org.hibernate.dialect.MariaDBDialect
 
+  ppurio:
+    base-url: https://message.ppurio.com
+    account: ${PPURIO_ACCOUNT}
+    auth: ${PPURIO_AUTHORIZATION}
+    tel-num:
+      myeongjun: ${MYEONGJUN_TELNUM}
+
 springdoc:
   swagger-ui:
     groups-order: DESC

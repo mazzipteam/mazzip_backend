@@ -4,7 +4,6 @@ import com.project.api.restaurant.dto.RestaurantCreateDTO;
 import com.project.api.restaurant.dto.RestaurantUpdateDTO;
 import com.project.api.restaurant_image.RestaurantImageService;
 import com.project.common.CommonResponse;
-import com.project.common.OctetStreamReadMsgConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +54,15 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}")
     public ResponseEntity get(@PathVariable Long restaurantId) {
         var restaurant = restaurantService.getRestaurant(restaurantId);
-        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(restaurant).build();
+        var response = CommonResponse.builder().code(200).message("레스토랑 조회 성공").data(restaurant).build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity getAll() {
+        var restaurants = restaurantService.getRestaurantAll();
+
+        var response = CommonResponse.builder().code(200).message("레스토랑 전체 조회 성공").data(restaurants).build();
         return ResponseEntity.ok(response);
     }
 }

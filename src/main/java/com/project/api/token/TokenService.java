@@ -20,7 +20,7 @@ public class TokenService {
         var user = userService.getUser(tokenCreateDTO.getUserId());
 
         var token = Token.builder()
-                .fcmToken(tokenCreateDTO.getFcmToken())
+                .telNum(tokenCreateDTO.getFcmToken())
                 .user(user)
                 .build();
 
@@ -32,7 +32,7 @@ public class TokenService {
         var token = getToken(tokenUpdateDTO.getTokenId());
 
         if(tokenUpdateDTO.getFcmToken()!= null)
-            token.setFcmToken(tokenUpdateDTO.getFcmToken());
+            token.setTelNum(tokenUpdateDTO.getFcmToken());
 
         tokenRepository.save(token);
         return token;
