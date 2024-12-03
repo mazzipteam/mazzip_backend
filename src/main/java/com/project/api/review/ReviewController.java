@@ -65,7 +65,7 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/add/user/{restaurantId}")
+    @GetMapping("/add/rating/{restaurantId}")
     public ResponseEntity getRatingByRestaurant(@PathVariable Long restaurantId) {
         var reviews = reviewService.getAllReportByRestaurant(restaurantId);
         var ratings = reviewService.getRatings(reviews);
