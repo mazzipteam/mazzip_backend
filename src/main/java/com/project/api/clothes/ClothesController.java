@@ -4,8 +4,10 @@ import com.project.api.clothes.dto.ClothesCreateDTO;
 import com.project.api.clothes.dto.ClothesUpdateDTO;
 import com.project.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/clothes")
@@ -16,9 +18,12 @@ public class ClothesController {
     // TODO: Category 반환하는 API도 있어야 할듯
 
     // 의상 생성
-    @PostMapping
-    public ResponseEntity create(@RequestBody ClothesCreateDTO clothesCreateDTO) {
-        var clothes = clothesService.create(clothesCreateDTO);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity create(
+            @RequestBody ClothesCreateDTO clothesCreateDTO,
+            @RequestPart(value = "image", required = false) MultipartFile image
+    ) {
+        var clothes = clothesService.create(clothesCreateDTO, image);
         var response = CommonResponse.builder().code(200).message("의상 생성 성공").data(clothes).build();
         return ResponseEntity.ok(response);
     }
