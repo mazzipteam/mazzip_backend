@@ -33,8 +33,9 @@ public class Avatar {
     @Column(nullable = false)
     private int evolution;
 
+    @Builder.Default
     @Column(nullable = false)
-    private LocalDateTime eatDate;
+    private LocalDateTime eatDate = LocalDateTime.now();
 
     @Column(nullable = false)
     private int eatCount;
