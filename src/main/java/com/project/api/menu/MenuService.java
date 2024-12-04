@@ -41,7 +41,7 @@ public class MenuService {
             menuRepository.save(menu);
             return menu;
         } catch (Exception e) {
-            throw new ControlledException(MENU_NOT_FOUND);
+            throw new RuntimeException();
         }
     }
 
