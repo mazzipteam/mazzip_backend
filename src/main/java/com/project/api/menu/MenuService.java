@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.project.exception.error_code.MenuErrorCode.*;
@@ -45,7 +46,7 @@ public class MenuService {
         }
     }
 
-    public Menu update(MenuUpdateDTO menuUpdateDTO) {
+    public Menu update(MenuUpdateDTO menuUpdateDTO, MultipartFile multipartFile) {
         var menu = getMenu(menuUpdateDTO.getMenuId());
 
         if(menuUpdateDTO.getFoodCategoryId() != null){
@@ -80,11 +81,11 @@ public class MenuService {
             menu.setCheap(menuUpdateDTO.getCheap().charAt(0));
         }
 
-        if(menuUpdateDTO.getImage() != null) {
+        if(multipartFile != null) {
             // 4. [에러처리]
             try {
-                menu.setImage(menuUpdateDTO.getImage().getBytes());
-            } catch (IllegalArgumentException e) {
+                menu.setImage(multipartFile.getBytes());
+            } catch (IllegalArgumentException | IOException e) {
                 throw new ControlledException(IMAGE_OF_INCORRECT_FORMAT);
             }
         }
