@@ -54,7 +54,7 @@ public class ReservationController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all/user/{restaurantId}")
+    @GetMapping("/all/restaurant/{restaurantId}")
     public ResponseEntity getAllByRestaurant(@PathVariable Long restaurantId) {
         var reservations = reservationService.getAllReservationByRestaurant(restaurantId);
         var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservations).build();
