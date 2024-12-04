@@ -57,7 +57,7 @@ public class MemoService {
     public Memo delete(Long memoId) {
         var memo = getMemo(memoId);
 
-        memoRepository.deleteByMemoId(memoId);
+        memoRepository.deleteById(memoId);
         return memo;
     }
 
