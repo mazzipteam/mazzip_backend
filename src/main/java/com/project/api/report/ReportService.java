@@ -70,7 +70,7 @@ public class ReportService {
     public Report delete(Long reportId) {
         var report = getReport(reportId);
 
-        reportRepository.deleteByReportId(reportId);
+        reportRepository.deleteById(reportId);
         return report;
     }
 

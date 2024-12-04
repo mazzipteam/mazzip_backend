@@ -33,7 +33,7 @@ public class BookmarkService {
     public Bookmark delete(Long bookmarkId) {
         var bookmark = getBookmark(bookmarkId);
 
-        bookmarkRepository.deleteByBookmarkId(bookmarkId);
+        bookmarkRepository.deleteById(bookmarkId);
         return bookmark;
     }
 

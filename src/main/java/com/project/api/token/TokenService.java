@@ -41,7 +41,7 @@ public class TokenService {
     public Token delete(Long tokenId) {
         var token = getToken(tokenId);
 
-        tokenRepository.deleteByTokenId(tokenId);
+        tokenRepository.deleteById(tokenId);
         return token;
     }
 

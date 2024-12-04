@@ -94,7 +94,7 @@ public class UserService {
     public User delete(Long userId) {
         var user = getUser(userId);
 
-        userRepository.deleteByUserId(userId);
+        userRepository.deleteById(userId);
         return user;
     }
 

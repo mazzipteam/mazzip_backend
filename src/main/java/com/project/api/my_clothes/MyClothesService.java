@@ -55,7 +55,7 @@ public class MyClothesService {
     public MyClothes delete(Long myClothesId) {
         var myClothes = getMyClothes(myClothesId);
 
-        myClothesRepository.deleteByMyClothesId(myClothesId);
+        myClothesRepository.deleteById(myClothesId);
         return myClothes;
     }
 

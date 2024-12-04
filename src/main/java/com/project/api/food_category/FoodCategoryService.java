@@ -49,7 +49,7 @@ public class FoodCategoryService {
     public FoodCategory delete(Long foodCategoryId) {
         var foodCategory = getFoodCategory(foodCategoryId);
 
-        foodCategoryRepository.deleteByFoodCategoryId(foodCategoryId);
+        foodCategoryRepository.deleteById(foodCategoryId);
         return foodCategory;
     }
 

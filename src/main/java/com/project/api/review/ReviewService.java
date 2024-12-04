@@ -79,7 +79,7 @@ public class ReviewService {
     public Review delete(Long reviewId) {
         var review = getReview(reviewId);
 
-        reviewRepository.deleteByReviewId(reviewId);
+        reviewRepository.deleteById(reviewId);
         return review;
     }
 

@@ -111,7 +111,7 @@ public class MenuService {
     public Menu delete(Long menuId) {
         var menu = getMenu(menuId);
 
-        menuRepository.deleteByMenuId(menuId);
+        menuRepository.deleteById(menuId);
         return menu;
     }
 

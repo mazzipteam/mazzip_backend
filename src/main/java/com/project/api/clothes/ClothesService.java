@@ -99,7 +99,7 @@ public class ClothesService {
     public Clothes delete(Long clothesId) {
         var clothes = getClothes(clothesId);
 
-        clothesRepository.deleteByClothesId(clothesId);
+        clothesRepository.deleteById(clothesId);
         return clothes;
     }
 

@@ -70,7 +70,7 @@ public class RestaurantImageService {
     public RestaurantImage delete(Long restaurantImageId) {
         var restaurantImage = getRestaurantImage(restaurantImageId);
 
-        restaurantImageRepository.deleteByRestaurantImageId(restaurantImageId);
+        restaurantImageRepository.deleteById(restaurantImageId);
         return restaurantImage;
     }
 

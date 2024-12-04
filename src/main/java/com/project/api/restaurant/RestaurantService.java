@@ -117,7 +117,7 @@ public class RestaurantService {
     public Restaurant delete(Long restaurantId) {
         var restaurant = getRestaurant(restaurantId);
 
-        restaurantRepository.deleteByRestaurantId(restaurantId);
+        restaurantRepository.deleteById(restaurantId);
         return restaurant;
     }
 
