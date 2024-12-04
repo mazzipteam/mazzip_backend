@@ -13,4 +13,5 @@ public class ClothesUpdateDTO {
     private String category;
     private String image;
     private String cost;
+    private String limitLevel;
 }
