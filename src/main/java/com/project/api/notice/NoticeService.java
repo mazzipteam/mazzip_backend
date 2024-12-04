@@ -1,6 +1,5 @@
 package com.project.api.notice;
 
-import com.project.api.bookmark.BookmarkService;
 import com.project.api.user.UserService;
 import com.project.entity.Notice;
 import com.project.exception.ControlledException;
@@ -15,16 +14,12 @@ import static com.project.exception.error_code.NoticeErrorCode.NOTICE_NOT_FOUND_
 @RequiredArgsConstructor
 public class NoticeService {
     private final UserService userService;
-    private final BookmarkService bookmarkService;
     private final NoticeRepository noticeRepository;
 
     public Notice create(NoticeCreateDTO noticeCreateDTO) {
-        var user = userService.getUser(noticeCreateDTO.getUserId());
-        var bookmark = bookmarkService.getBookmark(noticeCreateDTO.getBookmarkId());
 
         var notice = Notice.builder()
-                .user(user)
-                .bookmark(bookmark)
+                .bookmarks(noticeCreateDTO.getBookmarks())
                 .message(noticeCreateDTO.getMessage())
                 .build();
 

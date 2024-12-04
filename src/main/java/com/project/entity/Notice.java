@@ -3,6 +3,7 @@ package com.project.entity;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,9 +22,9 @@ public class Notice {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookmark_id")
-    private Bookmark bookmark;
+    private List<Bookmark> bookmarks;
 
     @Column(nullable = false)
     private String message;

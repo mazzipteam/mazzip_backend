@@ -1,5 +1,7 @@
 package com.project.entity.reservation;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
@@ -30,11 +32,13 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private State state;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }

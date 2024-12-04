@@ -19,7 +19,7 @@ public class Token {
     private Long tokenId;
 
     @Column(unique = true, nullable = false)
-    private String fcmToken;
+    private String telNum;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 import static com.project.exception.error_code.AvatarErrorCode.AVATAR_NOT_FOUND;
+import static com.project.exception.error_code.AvatarErrorCode.AVATAR_NOT_FOUND_BY_USER;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +74,14 @@ public class AvatarService {
         avatar.setEatCount(avatar.getEatCount() + 1);
         avatar.setEatDate(LocalDateTime.now());
         avatarRepository.save(avatar);
+        return avatar;
+    }
+
+    public Avatar getAvatarByUserId(Long userId) {
+        var user = userService.getUser(userId);
+        var avatar = avatarRepository.findByUser(user)
+                .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND_BY_USER));
+
         return avatar;
     }
 }

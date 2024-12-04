@@ -9,6 +9,8 @@ import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.project.entity.restraunt.Region.성북구;
 import static com.project.exception.error_code.RestaurantErrorCode.*;
 import static com.project.exception.error_code.UserErrorCode.TELNUM_OF_INCORRECT_FORMAT;
@@ -103,7 +105,7 @@ public class RestaurantService {
             restaurant.setName(restaurantUpdateDTO.getTakeOut());
 
         if(restaurantUpdateDTO.getUserId()!= null){
-            var userId = Long.getLong(restaurantUpdateDTO.getUserId());
+            var userId = Long.parseLong(restaurantUpdateDTO.getUserId());
             var user = userService.getUser(userId);
             restaurant.setUser(user);
         }
@@ -122,6 +124,20 @@ public class RestaurantService {
     public Restaurant getRestaurant(Long restaurantId) {
         var restaurant = restaurantRepository.findByRestaurantId(restaurantId)
                 .orElseThrow(() -> new ControlledException(RESTAURANT_NOT_FOUND));
+
+        return restaurant;
+    }
+
+    public List<Restaurant> getRestaurantAll() {
+        var restaurants = restaurantRepository.findAll();
+
+        return restaurants;
+    }
+
+    public Restaurant getRestaurantByUser(Long userId) {
+        var user = userService.getUser(userId);
+        var restaurant = restaurantRepository.findByUser(user)
+                .orElseThrow(()->new ControlledException(RESTAURANT_NOT_FOUND_BY_USER));
 
         return restaurant;
     }

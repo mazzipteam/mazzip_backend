@@ -39,7 +39,6 @@ public class UserService {
         Role role;
         try {
             role = Role.valueOf(userCreateDTO.getRole());
-            role = Role.USER; // TODO: 임시로 계정은 무조건 USER로 생성되게 설정
         } catch (IllegalArgumentException e) {
             throw new ControlledException(ROLE_OF_INCORRECT_FORMAT);
         }
@@ -118,5 +117,34 @@ public class UserService {
             return false;
         }
         return EMAIL_PATTERN.matcher(email).matches();
+    }
+
+    public User login(LoginDTO loginDTO) {
+        var user = userRepository.findByEmail(loginDTO.getEmail())
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_EMAIL));
+
+        if(!user.getPassword().equals(loginDTO.getPassword()))
+            throw new ControlledException(USER_NOT_FOUND_BY_PASSWORD);
+
+        return user;
+    }
+
+    public User findEmail(String nickName, Long telNum) {
+        var user = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_NICK_NAME));
+
+        if(user.getTelNum().equals(telNum)) throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
+
+        return user;
+    }
+
+    public User findPassword(String nickName, Long telNum, String email) {
+        var user = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new ControlledException(USER_NOT_FOUND_BY_NICK_NAME));
+
+        if(user.getTelNum().equals(telNum)) throw new ControlledException(TELNUM_OF_INCORRECT_FORMAT);
+        if(user.getEmail().equals(email)) throw new ControlledException(EMAIL_ALREADY_EXISTS);
+
+        return user;
     }
 }

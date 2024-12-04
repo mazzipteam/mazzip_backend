@@ -75,4 +75,19 @@ public class MyClothesService {
 
         return allMyClothes;
     }
+
+    public MyClothes wear(MyClothes myClothes) {
+        var allMyClothes = myClothesRepository.findByAvatar(myClothes.getAvatar())
+                        .orElseThrow(()->new ControlledException(MY_CLOTHES_NOT_FOUND_IN_AVATAR));
+
+        allMyClothes.forEach(param -> {
+            param.setWear('N');
+            myClothesRepository.save(param);
+        });
+
+        myClothes.setWear('Y');
+
+        myClothesRepository.save(myClothes);
+        return myClothes;
+    }
 }

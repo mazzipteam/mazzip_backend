@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
@@ -38,13 +39,18 @@ public class Review {
     @Lob
     private byte[] image;
 
+    @Builder.Default
+    private String answer = "";
+
     @Column(nullable = false)
     private Integer recommend;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;

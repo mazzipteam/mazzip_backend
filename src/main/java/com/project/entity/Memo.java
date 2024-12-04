@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
@@ -32,10 +33,12 @@ public class Memo {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;

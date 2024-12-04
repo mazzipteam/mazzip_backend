@@ -44,4 +44,25 @@ public class UserController {
         var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user).build();
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
+        var user = userService.login(loginDTO);
+        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user).build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/findId/{nickName}/{telNum}")
+    public ResponseEntity findEmail(@PathVariable String nickName, @PathVariable Long telNum) {
+        var user = userService.findEmail(nickName, telNum);
+        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user.getEmail()).build();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/findPassword/{nickName}/{telNum}/{email}")
+    public ResponseEntity findPassword(@PathVariable String nickName, @PathVariable Long telNum, @PathVariable String email) {
+        var user = userService.findPassword(nickName, telNum, email);
+        var response = CommonResponse.builder().code(200).message("유저 조회 성공").data(user.getPassword()).build();
+        return ResponseEntity.ok(response);
+    }
 }

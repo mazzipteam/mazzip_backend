@@ -7,6 +7,9 @@ import com.project.entity.clothes.Clothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 
 import static com.project.exception.error_code.ClothesErrorCode.*;
@@ -16,7 +19,7 @@ import static com.project.exception.error_code.ClothesErrorCode.*;
 public class ClothesService {
     private final ClothesRepository clothesRepository;
 
-    public Clothes create(ClothesCreateDTO clothesCreateDTO) {
+    public Clothes create(ClothesCreateDTO clothesCreateDTO, MultipartFile image) {
         // 1. [예외처리] 잘못된 형식의 카테고리
         Category category;
         try {
@@ -25,15 +28,19 @@ public class ClothesService {
             throw new ControlledException(CATEGORY_OF_INCORRECT_FORMAT);
         }
 
-        var clothes = Clothes.builder()
-                .name(clothesCreateDTO.getName())
-                .category(category)
-                .image(clothesCreateDTO.getImage())
-                .cost(clothesCreateDTO.getCost())
-                .build();
+        try {
+            var clothes = Clothes.builder()
+                    .name(clothesCreateDTO.getName())
+                    .category(category)
+                    .image(image.getBytes())
+                    .cost(clothesCreateDTO.getCost())
+                    .build();
 
-        clothesRepository.save(clothes);
-        return clothes;
+            clothesRepository.save(clothes);
+            return clothes;
+        }catch (IOException e) {
+            throw new ControlledException(CLOTHES_NOT_FOUND);
+        }
     }
 
     public Clothes update(ClothesUpdateDTO clothesUpdateDTO) {

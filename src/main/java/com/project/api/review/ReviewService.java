@@ -1,6 +1,7 @@
 package com.project.api.review;
 
 import com.project.api.restaurant.RestaurantService;
+import com.project.api.review.dto.AnswerDTO;
 import com.project.api.review.dto.ReviewCreateDTO;
 import com.project.api.review.dto.ReviewUpdateDTO;
 import com.project.api.user.UserService;
@@ -8,8 +9,11 @@ import com.project.entity.Review;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.project.api.report.ReportErrorMessage.REPORT_NOT_FOUND_BY_RESTAURANT;
@@ -25,24 +29,28 @@ public class ReviewService {
     private final RestaurantService restaurantService;
     private final ReviewRepository reviewRepository;
 
-    public Review create(ReviewCreateDTO reviewCreateDTO) {
+    public Review create(ReviewCreateDTO reviewCreateDTO, MultipartFile image) {
         var user = userService.getUser(reviewCreateDTO.getUserId());
         var restaurant = restaurantService.getRestaurant(reviewCreateDTO.getRestaurantId());
 
-        var review = Review.builder()
-                .rating(reviewCreateDTO.getRating())
-                .title(reviewCreateDTO.getTitle())
-                .description(reviewCreateDTO.getDescription())
-                .image(reviewCreateDTO.getImage())
-                .user(user)
-                .restaurant(restaurant)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .recommend(0)
-                .build();
+        try {
+            var review = Review.builder()
+                    .rating(reviewCreateDTO.getRating())
+                    .title(reviewCreateDTO.getTitle())
+                    .description(reviewCreateDTO.getDescription())
+                    .image(image.getBytes())
+                    .user(user)
+                    .restaurant(restaurant)
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
+                    .recommend(0)
+                    .build();
 
-        reviewRepository.save(review);
-        return review;
+            reviewRepository.save(review);
+            return review;
+        } catch (IOException e) {
+            throw new ControlledException(REVIEW_NOT_FOUND);
+        }
     }
 
     public Review update(ReviewUpdateDTO reviewUpdateDTO) {
@@ -96,5 +104,23 @@ public class ReviewService {
                 .orElseThrow(()->new ControlledException(REPORT_NOT_FOUND_BY_RESTAURANT));
 
         return reviews;
+    }
+
+    public List<Double> getRatings(List<Review> reviews) {
+        List<Double> counters = new ArrayList<>(0);
+        for (Review review : reviews) {
+            counters.set(review.getRating().intValue(), counters.get(review.getRating().intValue())+1);
+            counters.set(0, counters.getFirst()+review.getRating());
+        }
+
+        return counters;
+    }
+
+    public Review answer(AnswerDTO answerDTO) {
+        var review = getReview(answerDTO.getReviewId());
+        review.setAnswer(answerDTO.getAnswer());
+
+        reviewRepository.save(review);
+        return review;
     }
 }

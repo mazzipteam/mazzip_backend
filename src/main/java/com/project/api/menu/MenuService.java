@@ -25,10 +25,6 @@ public class MenuService {
         var restaurant = restaurantService.getRestaurant(menuCreateDTO.getRestaurantId());
         var foodCategory = foodCategoryService.getFoodCategory(menuCreateDTO.getFoodCategoryId());
 
-        // 1. [예외처리] 이미 연결된 레스토랑이 있는 경우
-        if(restaurantService.getRestaurant(menuCreateDTO.getRestaurantId()) != null)
-            throw new ControlledException(RESTAURANT_ALREADY_EXISTS);
-
         try {
             var menu = Menu.builder()
                     .name(menuCreateDTO.getName())
@@ -45,7 +41,7 @@ public class MenuService {
             menuRepository.save(menu);
             return menu;
         } catch (Exception e) {
-            throw new ControlledException(MENU_NOT_FOUND);
+            throw new RuntimeException();
         }
     }
 
