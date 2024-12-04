@@ -20,6 +20,7 @@ public class MyClothes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long myClothesId;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
