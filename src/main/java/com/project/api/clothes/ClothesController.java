@@ -20,7 +20,7 @@ public class ClothesController {
     // 의상 생성
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity create(
-            @RequestBody ClothesCreateDTO clothesCreateDTO,
+            @RequestPart ClothesCreateDTO clothesCreateDTO,
             @RequestPart(value = "image", required = false) MultipartFile image
     ) {
         var clothes = clothesService.create(clothesCreateDTO, image);
