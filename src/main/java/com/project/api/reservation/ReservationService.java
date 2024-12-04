@@ -89,7 +89,7 @@ public class ReservationService {
     public Reservation delete(Long reservationId) {
         var reservation = getReservation(reservationId);
 
-        reservationRepository.deleteByReservationId(reservationId);
+        reservationRepository.deleteById(reservationId);
         return reservation;
     }
 
