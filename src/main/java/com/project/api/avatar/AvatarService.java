@@ -39,6 +39,9 @@ public class AvatarService {
         if(avatarUpdateDTO.getName()!= null)
             avatar.setName(avatarUpdateDTO.getName());
 
+        if(avatarUpdateDTO.getLevel()!= null)
+            avatar.setLevel(Integer.parseInt(avatarUpdateDTO.getLevel()));
+
         avatarRepository.save(avatar);
         return avatar;
     }
