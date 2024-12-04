@@ -28,4 +28,6 @@ public class Clothes {
 
     @Column(nullable = false)
     private Integer cost;
+
+    private Integer limitLevel;
 }

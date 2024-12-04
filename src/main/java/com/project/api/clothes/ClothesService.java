@@ -34,6 +34,7 @@ public class ClothesService {
                     .category(category)
                     .image(image.getBytes())
                     .cost(clothesCreateDTO.getCost())
+                    .limitLevel(clothesCreateDTO.getLimitLevel())
                     .build();
 
             clothesRepository.save(clothes);
@@ -80,6 +81,14 @@ public class ClothesService {
                 clothes.setCost(Integer.valueOf(clothesUpdateDTO.getCost()));
             } catch (NumberFormatException e) {
                 throw new ControlledException(COST_OF_INCORRECT_FORMAT);
+            }
+        }
+
+        if(clothesUpdateDTO.getLimitLevel()!=null) {
+            try {
+                clothes.setLimitLevel(Integer.valueOf(clothesUpdateDTO.getLimitLevel()));
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Limit level of clothes");
             }
         }
 

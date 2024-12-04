@@ -11,4 +11,5 @@ public class ClothesCreateDTO {
     private String name;
     private String category;
     private Integer cost;
+    private Integer limitLevel;
 }
