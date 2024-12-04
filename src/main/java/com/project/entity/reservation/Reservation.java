@@ -37,7 +37,7 @@ public class Reservation {
     private User user;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }
