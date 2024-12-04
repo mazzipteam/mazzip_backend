@@ -45,6 +45,14 @@ public class AvatarController {
         return ResponseEntity.ok(response);
     }
 
+    // 아바타 조회
+    @GetMapping("/{userId}")
+    public ResponseEntity getByUserId(@PathVariable Long userId) {
+        var avatar = avatarService.getAvatarByUserId(userId);
+        var response = CommonResponse.builder().code(200).message("아바타 조회 성공").data(avatar).build();
+        return ResponseEntity.ok(response);
+    }
+
     @PatchMapping("/expUp/{avatarId}/{exp}")
     public ResponseEntity expUp(@PathVariable Long avatarId, @PathVariable Integer exp) {
         var avatar = avatarService.expUp(avatarId, exp);
