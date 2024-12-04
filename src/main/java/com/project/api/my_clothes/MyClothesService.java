@@ -4,6 +4,7 @@ import com.project.api.avatar.AvatarService;
 import com.project.api.clothes.ClothesService;
 import com.project.api.my_clothes.dto.MyClothesCreateDTO;
 import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
+import com.project.entity.Avatar;
 import com.project.entity.MyClothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,9 @@ import static com.project.exception.error_code.MyClothesErrorCode.*;
 @RequiredArgsConstructor
 public class MyClothesService {
     private final MyClothesRepository myClothesRepository;
-    private final AvatarService avatarService;
     private final ClothesService clothesService;
 
-    public MyClothes create(MyClothesCreateDTO myClothesCreateDTO) {
-        var avatar = avatarService.getAvatar(myClothesCreateDTO.getAvatarId());
+    public MyClothes create(MyClothesCreateDTO myClothesCreateDTO, Avatar avatar) {
         var clothes = clothesService.getClothes(myClothesCreateDTO.getClothesId());
 
         // 1. [예외처리] 이미 획득한 의상을 다시한번 생성하는 경우
@@ -67,9 +66,7 @@ public class MyClothesService {
         return myClothes;
     }
 
-    public List<MyClothes> getAllMyClothes(Long avatarId) {
-        var avatar = avatarService.getAvatar(avatarId);
-
+    public List<MyClothes> getAllMyClothes(Avatar avatar) {
         var allMyClothes = myClothesRepository.findByAvatar(avatar)
                 .orElseThrow(() -> new ControlledException(MY_CLOTHES_NOT_FOUND_IN_AVATAR));
 

@@ -1,5 +1,6 @@
 package com.project.api.my_clothes;
 
+import com.project.api.avatar.AvatarService;
 import com.project.api.my_clothes.dto.MyClothesCreateDTO;
 import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
 import com.project.common.CommonResponse;
@@ -12,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MyClothesController {
     private final MyClothesService myClothesService;
+    private final AvatarService avatarService;
 
     // 내 의상 생성
     @PostMapping
     public ResponseEntity create(@RequestBody MyClothesCreateDTO myClothesCreateDTO) {
-        var myClothes = myClothesService.create(myClothesCreateDTO);
+        var avatar = avatarService.getAvatar(myClothesCreateDTO.getAvatarId());
+        var myClothes = myClothesService.create(myClothesCreateDTO, avatar);
         var response = CommonResponse.builder().code(200).message("내 의상 생성 성공").data(myClothes).build();
         return ResponseEntity.ok(response);
     }
@@ -47,7 +50,8 @@ public class MyClothesController {
 
     @GetMapping("/all/{avatarId}")
     public ResponseEntity getAll(@PathVariable Long avatarId) {
-        var allMyClothes = myClothesService.getAllMyClothes(avatarId);
+        var avatar = avatarService.getAvatar(avatarId);
+        var allMyClothes = myClothesService.getAllMyClothes(avatar);
         var response = CommonResponse.builder().code(200).message("내 의상 조회 성공").data(allMyClothes).build();
         return ResponseEntity.ok(response);
     }
