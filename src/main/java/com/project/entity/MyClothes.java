@@ -1,6 +1,7 @@
 package com.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.clothes.Clothes;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,8 +26,8 @@ public class MyClothes {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 
