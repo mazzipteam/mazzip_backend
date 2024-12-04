@@ -14,7 +14,6 @@ public class MenuUpdateDTO {
     private String price;
     private String description;
     private String cheap;
-    private String image;
     private String main;
     private String isReserve;
 }

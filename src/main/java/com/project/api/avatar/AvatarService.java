@@ -2,6 +2,9 @@ package com.project.api.avatar;
 
 import com.project.api.avatar.dto.AvatarCreateDTO;
 import com.project.api.avatar.dto.AvatarUpdateDTO;
+import com.project.api.clothes.ClothesService;
+import com.project.api.my_clothes.MyClothesService;
+import com.project.api.my_clothes.dto.MyClothesCreateDTO;
 import com.project.api.user.UserService;
 import com.project.entity.Avatar;
 import com.project.exception.ControlledException;
@@ -18,6 +21,8 @@ import static com.project.exception.error_code.AvatarErrorCode.AVATAR_NOT_FOUND_
 public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final UserService userService;
+    private final MyClothesService myClothesService;
+    private final ClothesService clothesService;
 
     public Avatar create(AvatarCreateDTO avatarCreateDTO) {
         var user = userService.getUser(avatarCreateDTO.getUserId());
@@ -81,6 +86,26 @@ public class AvatarService {
         var user = userService.getUser(userId);
         var avatar = avatarRepository.findByUser(user)
                 .orElseThrow(() -> new ControlledException(AVATAR_NOT_FOUND_BY_USER));
+
+        return avatar;
+    }
+
+    public Avatar levelUp(Long avatarId) {
+        var avatar = getAvatar(avatarId);
+        avatar.setLevel(avatar.getLevel() + 1);
+        avatarRepository.save(avatar);
+
+        var clotheses = clothesService.getAllClothes();
+        for (var clothes : clotheses) {
+            if(clothes.getLimitLevel() == avatar.getLevel()){
+                var myClothesCreateDto = MyClothesCreateDTO.builder()
+                        .avatarId(avatarId)
+                        .clothesId(clothes.getClothesId())
+                        .build();
+
+                myClothesService.create(myClothesCreateDto);
+            }
+        }
 
         return avatar;
     }

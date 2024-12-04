@@ -27,9 +27,12 @@ public class MenuController {
     }
 
     // 메뉴 수정
-    @PatchMapping
-    public ResponseEntity update(@RequestBody MenuUpdateDTO menuUpdateDTO) {
-        var menu = menuService.update(menuUpdateDTO);
+    @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity update(
+            @RequestPart MenuUpdateDTO menuUpdateDTO,
+            @RequestPart(value = "image", required = false) MultipartFile multipartFile
+    ) {
+        var menu = menuService.update(menuUpdateDTO, multipartFile);
         var response = CommonResponse.builder().code(200).message("메뉴 수정 성공").data(menu).build();
         return ResponseEntity.ok(response);
     }

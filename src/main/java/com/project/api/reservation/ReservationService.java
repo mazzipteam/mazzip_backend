@@ -1,5 +1,6 @@
 package com.project.api.reservation;
 
+import com.project.api.avatar.AvatarService;
 import com.project.api.reservation.dto.ReservationCreateDTO;
 import com.project.api.reservation.dto.ReservationUpdateDTO;
 import com.project.entity.reservation.Reservation;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import static com.project.entity.reservation.State.DONE;
 import static com.project.entity.reservation.State.NOT_YET;
 import static com.project.exception.error_code.ReservationErrorCode.*;
 
@@ -23,6 +25,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final RestaurantService restaurantService;
     private final UserService userService;
+    private final AvatarService avatarService;
 
     public Reservation create(ReservationCreateDTO reservationCreateDTO) {
         var restaurant = restaurantService.getRestaurant(reservationCreateDTO.getRestaurantId());
@@ -114,5 +117,25 @@ public class ReservationService {
                 .orElseThrow(()->new ControlledException(RESERVATION_NOT_FOUND_BY_RESTAURANT));
 
         return reservations;
+    }
+
+    /**
+     * 1. 예약승인 버튼을 누르면 해당 예약의 state를 DONE으로 바꾼다.
+     *
+     * 2. 해당 예약을 했던 유저의 아바타 레벨을 올린다.
+     *
+     * 3. 그 아바타의 레벨에 맞는 내의상이 최신화된다.
+     *
+     */
+    public Reservation accept(Long reservationId) {
+        var reservation = getReservation(reservationId);
+        reservation.setState(DONE);
+        reservationRepository.save(reservation);
+
+        var user = reservation.getUser();
+        var avatar = avatarService.getAvatarByUserId(user.getUserId());
+        avatarService.levelUp(avatar.getAvatarId());
+
+        return reservation;
     }
 }
