@@ -10,4 +10,5 @@ import lombok.Setter;
 public class AvatarUpdateDTO {
     private Long avatarId;
     private String name;
+    private String level;
 }

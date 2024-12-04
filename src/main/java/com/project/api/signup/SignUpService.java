@@ -39,6 +39,8 @@ public class SignUpService {
                     .interior(multipartFileInterior.getBytes())
                     .build();
 
+            signUpRepository.save(signUp);
+
             return signUp;
         } catch (Exception e) {
             throw new RuntimeException(e);
