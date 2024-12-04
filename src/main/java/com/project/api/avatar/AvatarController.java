@@ -46,7 +46,7 @@ public class AvatarController {
     }
 
     // 아바타 조회
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity getByUserId(@PathVariable Long userId) {
         var avatar = avatarService.getAvatarByUserId(userId);
         var response = CommonResponse.builder().code(200).message("아바타 조회 성공").data(avatar).build();
