@@ -21,8 +21,7 @@ public class MyClothesService {
     private final MyClothesRepository myClothesRepository;
     private final ClothesService clothesService;
 
-    public MyClothes create(MyClothesCreateDTO myClothesCreateDTO) {
-        var avatar = avatarService.getAvatar(myClothesCreateDTO.getAvatarId());
+    public MyClothes create(MyClothesCreateDTO myClothesCreateDTO, Avatar avatar) {
         var clothes = clothesService.getClothes(myClothesCreateDTO.getClothesId());
 
         // 1. [예외처리] 이미 획득한 의상을 다시한번 생성하는 경우

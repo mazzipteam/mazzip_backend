@@ -18,7 +18,8 @@ public class MyClothesController {
     // 내 의상 생성
     @PostMapping
     public ResponseEntity create(@RequestBody MyClothesCreateDTO myClothesCreateDTO) {
-        var myClothes = myClothesService.create(myClothesCreateDTO);
+        var avatar = avatarService.getAvatar(myClothesCreateDTO.getAvatarId());
+        var myClothes = myClothesService.create(myClothesCreateDTO, avatar);
         var response = CommonResponse.builder().code(200).message("내 의상 생성 성공").data(myClothes).build();
         return ResponseEntity.ok(response);
     }
