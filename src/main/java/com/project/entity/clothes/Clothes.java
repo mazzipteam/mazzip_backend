@@ -23,7 +23,6 @@ public class Clothes {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Lob
     @Column(name = "image",nullable = false, columnDefinition="LONGBLOB")
     private byte[] image;
 
