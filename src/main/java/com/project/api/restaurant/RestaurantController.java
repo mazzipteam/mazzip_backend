@@ -44,7 +44,7 @@ public class RestaurantController {
     
     // 맛집 삭제
     @DeleteMapping("/{restaurantId}")
-    public ResponseEntity delete(@RequestParam Long restaurantId) {
+    public ResponseEntity delete(@PathVariable Long restaurantId) {
         var restaurant = restaurantService.delete(restaurantId);
         var response = CommonResponse.builder().code(200).message("맛집 삭제 성공").data(restaurant).build();
         return ResponseEntity.ok(response);
@@ -59,7 +59,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity getByUser(@RequestParam Long userId) {
+    public ResponseEntity getByUser(@PathVariable Long userId) {
         var restaurant = restaurantService.getRestaurantByUser(userId);
         var response = CommonResponse.builder().code(200).message("점주 레스토랑 조회 성공").data(restaurant).build();
         return ResponseEntity.ok(response);
