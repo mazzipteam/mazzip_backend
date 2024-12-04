@@ -41,7 +41,7 @@ public class Menu {
     private char cheap;
 
     @Lob
-    @Column(nullable = false)
+    @Column(name = "image",nullable = false, columnDefinition="LONGBLOB")
     private byte[] image;
 
     @Column(nullable = false)
