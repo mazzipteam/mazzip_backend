@@ -1,5 +1,6 @@
 package com.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
@@ -40,6 +41,7 @@ public class Avatar {
     @Column(nullable = false)
     private int eatCount;
 
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
