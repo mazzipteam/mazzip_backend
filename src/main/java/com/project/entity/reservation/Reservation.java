@@ -1,6 +1,7 @@
 package com.project.entity.reservation;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.entity.restraunt.Restaurant;
 import com.project.entity.user.User;
 import jakarta.persistence.*;
@@ -36,7 +37,7 @@ public class Reservation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
