@@ -24,7 +24,7 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "food_category_id")
     private FoodCategory foodCategory;
 
