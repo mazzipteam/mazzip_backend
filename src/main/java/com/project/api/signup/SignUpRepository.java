@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.List;
 
 @Repository
-public interface SignUpRepository extends JpaRepository<Restaurant, Long> {
+public interface SignUpRepository extends JpaRepository<SignUp, Long> {
     Optional<SignUp> findBySignUpId(Long signUpId);
 
     Optional<List<SignUp>> findByUser(User user);
