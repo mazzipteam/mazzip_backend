@@ -103,7 +103,7 @@ public class AvatarService {
                         .clothesId(clothes.getClothesId())
                         .build();
 
-                myClothesService.create(myClothesCreateDto);
+                myClothesService.create(myClothesCreateDto, avatar);
             }
         }
 
