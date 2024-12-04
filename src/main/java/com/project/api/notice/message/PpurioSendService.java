@@ -55,11 +55,13 @@ public class PpurioSendService {
         // 전송
         var ppurioSendResponse = restTemplate.postForObject(url+"/v1/message", request, PpurioSendResponse.class);
 
-        var noticeCreateDTO = NoticeCreateDTO.builder()
-                .bookmarks(bookmarks)
-                .message(ppurioMessageDTO.getContent())
-                .build();
-        noticeService.create(noticeCreateDTO);
+        for(var bookmark : bookmarks) {
+            var noticeCreateDTO = NoticeCreateDTO.builder()
+                    .bookmark(bookmark)
+                    .message(ppurioMessageDTO.getContent())
+                    .build();
+            noticeService.create(noticeCreateDTO);
+        }
 
         // 메세지 저장
         return ppurioSendResponse;
