@@ -24,7 +24,7 @@ public class Clothes {
     private Category category;
 
     @Lob
-    @Column(nullable = false)
+    @Column(name = "image",nullable = false, columnDefinition="LONGBLOB")
     private byte[] image;
 
     @Column(nullable = false)
