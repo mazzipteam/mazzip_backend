@@ -59,6 +59,7 @@ public class PpurioSendService {
                 .bookmarks(bookmarks)
                 .message(ppurioMessageDTO.getContent())
                 .build();
+
         noticeService.create(noticeCreateDTO);
 
         // 메세지 저장
