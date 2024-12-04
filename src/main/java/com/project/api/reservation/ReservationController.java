@@ -60,4 +60,12 @@ public class ReservationController {
         var response = CommonResponse.builder().code(200).message("예약 조회 성공").data(reservations).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/accept/{reservationId}")
+    public ResponseEntity accept(@PathVariable Long reservationId) {
+        var reservation = reservationService.accept(reservationId);
+        
+        var response = CommonResponse.builder().code(200).message("예약 상태 변경 성공").data(reservation).build();
+        return ResponseEntity.ok(response);
+    }
 }
