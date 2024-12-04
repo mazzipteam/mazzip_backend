@@ -19,7 +19,7 @@ public class NoticeService {
     public Notice create(NoticeCreateDTO noticeCreateDTO) {
 
         var notice = Notice.builder()
-                .bookmarks(noticeCreateDTO.getBookmarks())
+                .bookmark(noticeCreateDTO.getBookmark())
                 .message(noticeCreateDTO.getMessage())
                 .build();
 
