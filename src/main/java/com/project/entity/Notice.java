@@ -22,9 +22,9 @@ public class Notice {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookmark_id")
-    private List<Bookmark> bookmarks;
+    private Bookmark bookmark;
 
     @Column(nullable = false)
     private String message;

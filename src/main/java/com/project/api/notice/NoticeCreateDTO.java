@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 @Builder
 public class NoticeCreateDTO {
-    private List<Bookmark> bookmarks;
+    private Bookmark bookmark;
     private String message;
 }
