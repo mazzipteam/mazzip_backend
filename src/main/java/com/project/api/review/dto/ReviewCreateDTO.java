@@ -13,4 +13,5 @@ public class ReviewCreateDTO {
     private String description;
     private Long userId;
     private Long restaurantId;
+    private int recommend;
 }

@@ -43,7 +43,7 @@ public class ReviewService {
                     .restaurant(restaurant)
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
-                    .recommend(0)
+                    .recommend(reviewCreateDTO.getRecommend())
                     .build();
 
             reviewRepository.save(review);
