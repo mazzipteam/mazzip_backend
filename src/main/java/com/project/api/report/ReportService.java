@@ -88,4 +88,8 @@ public class ReportService {
 
         return reports;
     }
+
+    public List<Report> getAll() {
+        return reportRepository.findAll();
+    }
 }

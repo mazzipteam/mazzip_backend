@@ -53,4 +53,11 @@ public class ReportController {
         var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping
+    public ResponseEntity getAll() {
+        var reports = reportService.getAll();
+        var response = CommonResponse.builder().code(200).message("신고 조회 성공").data(reports).build();
+        return ResponseEntity.ok(response);
+    }
 }
