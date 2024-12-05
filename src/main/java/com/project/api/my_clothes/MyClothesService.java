@@ -6,6 +6,7 @@ import com.project.api.my_clothes.dto.MyClothesCreateDTO;
 import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
 import com.project.entity.Avatar;
 import com.project.entity.MyClothes;
+import com.project.entity.clothes.Clothes;
 import com.project.exception.ControlledException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,13 @@ public class MyClothesService {
         myClothes.setWear('Y');
 
         myClothesRepository.save(myClothes);
+        return myClothes;
+    }
+
+    public MyClothes getMyClothes(Clothes clothes, Avatar avatar) {
+        var myClothes = myClothesRepository.findByClothesAndAvatar(clothes, avatar)
+                .orElseThrow(()->new RuntimeException("에러발생"));
+
         return myClothes;
     }
 }

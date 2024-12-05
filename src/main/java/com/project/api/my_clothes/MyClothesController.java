@@ -1,6 +1,7 @@
 package com.project.api.my_clothes;
 
 import com.project.api.avatar.AvatarService;
+import com.project.api.clothes.ClothesService;
 import com.project.api.my_clothes.dto.MyClothesCreateDTO;
 import com.project.api.my_clothes.dto.MyClothesUpdateDTO;
 import com.project.common.CommonResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class MyClothesController {
     private final MyClothesService myClothesService;
     private final AvatarService avatarService;
+    private final ClothesService clothesService;
 
     // 내 의상 생성
     @PostMapping
@@ -59,6 +61,17 @@ public class MyClothesController {
     @PatchMapping("/wear/{myClothesId}")
     public ResponseEntity wear(@PathVariable Long myClothesId) {
         var wantClothes = myClothesService.getMyClothes(myClothesId);
+        var myClothes = myClothesService.wear(wantClothes);
+        var response = CommonResponse.builder().code(200).message("내 의상 착용 성공").data(myClothes).build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/wear/{clothesId}/{avatarId}")
+    public ResponseEntity wear2(@PathVariable Long clothesId, @PathVariable Long avatarId) {
+        var clothes = clothesService.getClothes(clothesId);
+        var avatar = avatarService.getAvatar(avatarId);
+        var wantClothes = myClothesService.getMyClothes(clothes, avatar);
+
         var myClothes = myClothesService.wear(wantClothes);
         var response = CommonResponse.builder().code(200).message("내 의상 착용 성공").data(myClothes).build();
         return ResponseEntity.ok(response);

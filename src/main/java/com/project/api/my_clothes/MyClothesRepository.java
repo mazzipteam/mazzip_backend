@@ -2,6 +2,7 @@ package com.project.api.my_clothes;
 
 import com.project.entity.Avatar;
 import com.project.entity.MyClothes;
+import com.project.entity.clothes.Clothes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface MyClothesRepository  extends JpaRepository<MyClothes, Long> {
     Optional<MyClothes> findByAvatarAndMyClothesId(Avatar avatar, Long myClothesId);
 
     void deleteByMyClothesId(Long myClothesId);
+
+    Optional<MyClothes> findByClothesAndAvatar(Clothes clothes, Avatar avatar);
 }
