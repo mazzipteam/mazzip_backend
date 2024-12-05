@@ -25,14 +25,17 @@ public class Avatar {
     @Column(nullable = false)
     private String name;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int level;
+    private int level = 0;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int experience;
+    private int experience = 0;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int evolution;
+    private int evolution = 1;
 
     @Builder.Default
     @Column(nullable = false)
