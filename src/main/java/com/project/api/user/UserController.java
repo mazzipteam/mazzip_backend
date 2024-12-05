@@ -1,5 +1,7 @@
 package com.project.api.user;
 
+import com.project.api.avatar.AvatarService;
+import com.project.api.avatar.dto.AvatarCreateDTO;
 import com.project.api.user.dto.UserCreateDTO;
 import com.project.api.user.dto.UserUpdateDTO;
 import com.project.common.CommonResponse;
@@ -12,11 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AvatarService avatarService;
 
     // 유저 생성
     @PostMapping
     public ResponseEntity create(@RequestBody UserCreateDTO userCreateDTO) {
         var user = userService.create(userCreateDTO);
+        var response = CommonResponse.builder().code(200).message("유저 생성 성공").data(user).build();
+        return ResponseEntity.ok(response);
+    }
+
+    // 유저 생성2
+    @PostMapping("/allInOne")
+    public ResponseEntity createAllInOne(@RequestBody UserCreateDTO userCreateDTO) {
+        var user = userService.create(userCreateDTO);
+        avatarService.create(AvatarCreateDTO.builder().name("아바타").userId(user.getUserId()).build());
+
         var response = CommonResponse.builder().code(200).message("유저 생성 성공").data(user).build();
         return ResponseEntity.ok(response);
     }
