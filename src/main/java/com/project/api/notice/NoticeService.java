@@ -49,7 +49,7 @@ public class NoticeService {
 
         var notices = new ArrayList<Notice>();
         for (var bookmark : bookmarks) {
-            var noticeList = noticeRepository.findByUser(bookmark.getUser())
+            var noticeList = noticeRepository.findByBookmark(bookmark)
                     .orElseThrow(()-> new ControlledException(NOTICE_NOT_FOUND));
             notices.addAll(noticeList);
         }
